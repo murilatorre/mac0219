@@ -1,3 +1,4 @@
+#include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -111,6 +112,8 @@ void write_to_file(){
     fclose(file);
 };
 
+
+// as paralelizações serão feitas nessa função
 void compute_mandelbrot(){
     double z_x;
     double z_y;
@@ -125,6 +128,8 @@ void compute_mandelbrot(){
     double c_x;
     double c_y;
 
+    // possível tipo 1 de thread, não precisa passar parâmeteros
+    // só criar variáveis
     for(i_y = 0; i_y < i_y_max; i_y++){
         c_y = c_y_min + i_y * pixel_height;
 
@@ -132,6 +137,7 @@ void compute_mandelbrot(){
             c_y = 0.0;
         };
 
+        // possível tipo 2 de thread, precisamos de c_y e i_y
         for(i_x = 0; i_x < i_x_max; i_x++){
             c_x         = c_x_min + i_x * pixel_width;
 
@@ -141,6 +147,7 @@ void compute_mandelbrot(){
             z_x_squared = 0.0;
             z_y_squared = 0.0;
 
+            // não podemos paralelizar, as chamadas iterativas são dependentes
             for(iteration = 0;
                 iteration < iteration_max && \
                 ((z_x_squared + z_y_squared) < escape_radius_squared);
