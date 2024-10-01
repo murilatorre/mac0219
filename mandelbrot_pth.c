@@ -3,6 +3,27 @@
 #include <stdlib.h>
 #include <math.h>
 
+void allocate_image_buffer();
+void init(int, char **);
+void update_rgb_buffer(int, int, int);
+void write_to_file();
+void compute_mandelbrot();
+
+/*   
+The following structure contains the necessary information  
+to allow a parallelized for.
+*/
+typedef struct {
+    double start;
+    double end;
+} for_data;
+
+
+/* Define globally accessible variables and a mutex */
+#define NUMTHRDS 8 
+pthread_t callThd[NUMTHRDS];
+for_data thread_data[NUMTHRDS];
+
 double c_x_min;
 double c_x_max;
 double c_y_min;
@@ -40,6 +61,64 @@ int colors[17][3] = {
                         {106, 52, 3},
                         {16, 16, 16},
                     };
+
+void *compute_mandelbrot_value(void *arg){
+    for_data* data = (for_data*) arg;
+    
+    double z_x;
+    double z_y;
+    double z_x_squared;
+    double z_y_squared;
+    double escape_radius_squared = 4;
+
+    int iteration;
+    int i_x;
+    int i_y;
+
+    double c_x;
+    double c_y;
+
+    int i_y_start = data->start;
+    int i_y_end  = data->end;
+
+    // possível tipo 1 de thread, não precisa passar parâmeteros
+    // só criar variáveis
+    for(i_y = i_y_start; i_y < i_y_end; i_y++){
+        c_y = c_y_min + i_y * pixel_height;
+
+        if(fabs(c_y) < pixel_height / 2){
+            c_y = 0.0;
+        };
+
+        // possível tipo 2 de thread, precisamos de c_y e i_y
+        for(i_x = 0; i_x < i_x_max; i_x++){
+            c_x         = c_x_min + i_x * pixel_width;
+
+            z_x         = 0.0;
+            z_y         = 0.0;
+
+            z_x_squared = 0.0;
+            z_y_squared = 0.0;
+
+            // não podemos paralelizar, as chamadas iterativas são dependentes
+            for(iteration = 0;
+                iteration < iteration_max && \
+                ((z_x_squared + z_y_squared) < escape_radius_squared);
+                iteration++){
+                z_y         = 2 * z_x * z_y + c_y;
+                z_x         = z_x_squared - z_y_squared + c_x;
+
+                z_x_squared = z_x * z_x;
+                z_y_squared = z_y * z_y;
+            };
+
+            update_rgb_buffer(iteration, i_x, i_y);
+        };
+    };
+
+    pthread_exit(0);
+} 
+
 
 void allocate_image_buffer(){
     int rgb_size = 3;
@@ -113,55 +192,24 @@ void write_to_file(){
 };
 
 
-// as paralelizações serão feitas nessa função
+// A função é encarregada de preparar as threads e chamá-las
 void compute_mandelbrot(){
-    double z_x;
-    double z_y;
-    double z_x_squared;
-    double z_y_squared;
-    double escape_radius_squared = 4;
+    double block_size = i_y_max / NUMTHRDS;
+    double remainder = i_y_max % NUMTHRDS;
+    double start = 0;
 
-    int iteration;
-    int i_x;
-    int i_y;
+    for (int t = 0; t < NUMTHRDS; t++) {
+        thread_data[t].start = start;
+        thread_data[t].end = start + block_size + (t < remainder? 1 : 0);
 
-    double c_x;
-    double c_y;
+        pthread_create(&callThd[t], NULL, compute_mandelbrot_value, (void *)&thread_data[t]);
 
-    // possível tipo 1 de thread, não precisa passar parâmeteros
-    // só criar variáveis
-    for(i_y = 0; i_y < i_y_max; i_y++){
-        c_y = c_y_min + i_y * pixel_height;
+        start = thread_data[t].end;
+    }
 
-        if(fabs(c_y) < pixel_height / 2){
-            c_y = 0.0;
-        };
-
-        // possível tipo 2 de thread, precisamos de c_y e i_y
-        for(i_x = 0; i_x < i_x_max; i_x++){
-            c_x         = c_x_min + i_x * pixel_width;
-
-            z_x         = 0.0;
-            z_y         = 0.0;
-
-            z_x_squared = 0.0;
-            z_y_squared = 0.0;
-
-            // não podemos paralelizar, as chamadas iterativas são dependentes
-            for(iteration = 0;
-                iteration < iteration_max && \
-                ((z_x_squared + z_y_squared) < escape_radius_squared);
-                iteration++){
-                z_y         = 2 * z_x * z_y + c_y;
-                z_x         = z_x_squared - z_y_squared + c_x;
-
-                z_x_squared = z_x * z_x;
-                z_y_squared = z_y * z_y;
-            };
-
-            update_rgb_buffer(iteration, i_x, i_y);
-        };
-    };
+    for (int t = 0; t < NUMTHRDS; t++) {
+        pthread_join(callThd[t], NULL);
+    }
 };
 
 int main(int argc, char *argv[]){
