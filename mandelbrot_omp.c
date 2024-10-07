@@ -112,7 +112,7 @@ void write_to_file(){
     fclose(file);
 };
 
-void compute_mandelbrot_openmp(int i_y){
+void compute_mandelbrot_aux(int i_x, int i_y, double c_y) {
     double z_x;
     double z_y;
     double z_x_squared;
