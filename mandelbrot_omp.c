@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <omp.h>
 
 double c_x_min;
 double c_x_max;
@@ -111,7 +112,7 @@ void write_to_file(){
     fclose(file);
 };
 
-void compute_mandelbrot(){
+void compute_mandelbrot(int i_y){
     double z_x;
     double z_y;
     double z_x_squared;
@@ -120,40 +121,38 @@ void compute_mandelbrot(){
 
     int iteration;
     int i_x;
-    int i_y;
 
     double c_x;
     double c_y;
+    
+    c_y = c_y_min + i_y * pixel_height;
 
-    for(i_y = 0; i_y < i_y_max; i_y++){
-        c_y = c_y_min + i_y * pixel_height;
+    if(fabs(c_y) < pixel_height / 2){
+        c_y = 0.0;
+    };
 
-        if(fabs(c_y) < pixel_height / 2){
-            c_y = 0.0;
+    for(i_x = 0; i_x < i_x_max; i_x++){
+        c_x         = c_x_min + i_x * pixel_width;
+
+        z_x         = 0.0;
+        z_y         = 0.0;
+
+        z_x_squared = 0.0;
+        z_y_squared = 0.0;
+
+        for(iteration = 0;
+            iteration < iteration_max && \
+            ((z_x_squared + z_y_squared) < escape_radius_squared);
+            iteration++){
+            z_y         = 2 * z_x * z_y + c_y;
+            z_x         = z_x_squared - z_y_squared + c_x;
+
+            z_x_squared = z_x * z_x;
+            z_y_squared = z_y * z_y;
         };
 
-        for(i_x = 0; i_x < i_x_max; i_x++){
-            c_x         = c_x_min + i_x * pixel_width;
-
-            z_x         = 0.0;
-            z_y         = 0.0;
-
-            z_x_squared = 0.0;
-            z_y_squared = 0.0;
-
-            for(iteration = 0;
-                iteration < iteration_max && \
-                ((z_x_squared + z_y_squared) < escape_radius_squared);
-                iteration++){
-                z_y         = 2 * z_x * z_y + c_y;
-                z_x         = z_x_squared - z_y_squared + c_x;
-
-                z_x_squared = z_x * z_x;
-                z_y_squared = z_y * z_y;
-            };
-
-            update_rgb_buffer(iteration, i_x, i_y);
-        };
+        update_rgb_buffer(iteration, i_x, i_y);
+        
     };
 };
 
@@ -161,8 +160,11 @@ int main(int argc, char *argv[]){
     init(argc, argv);
 
     allocate_image_buffer();
-
-    compute_mandelbrot();
+    
+    #pragma omp parallel for
+    for(int i_y = 0; i_y < i_y_max; i_y++) {
+       compute_mandelbrot_openmp(i_y);
+    }
 
     write_to_file();
 
