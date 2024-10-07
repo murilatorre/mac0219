@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include <math.h>
 
+
+void *compute_mandelbrot_value(void *);
 void allocate_image_buffer();
 void init(int, char **);
 void update_rgb_buffer(int, int, int);
@@ -19,8 +21,8 @@ typedef struct {
 } for_data;
 
 
-/* Define globally accessible variables and a mutex */
-#define NUMTHRDS 8 
+/* Define globally accessible variables */
+#define NUMTHRDS 16
 pthread_t callThd[NUMTHRDS];
 for_data thread_data[NUMTHRDS];
 
@@ -81,8 +83,6 @@ void *compute_mandelbrot_value(void *arg){
     int i_y_start = data->start;
     int i_y_end  = data->end;
 
-    // possível tipo 1 de thread, não precisa passar parâmeteros
-    // só criar variáveis
     for(i_y = i_y_start; i_y < i_y_end; i_y++){
         c_y = c_y_min + i_y * pixel_height;
 
@@ -90,7 +90,6 @@ void *compute_mandelbrot_value(void *arg){
             c_y = 0.0;
         };
 
-        // possível tipo 2 de thread, precisamos de c_y e i_y
         for(i_x = 0; i_x < i_x_max; i_x++){
             c_x         = c_x_min + i_x * pixel_width;
 
@@ -100,7 +99,7 @@ void *compute_mandelbrot_value(void *arg){
             z_x_squared = 0.0;
             z_y_squared = 0.0;
 
-            // não podemos paralelizar, as chamadas iterativas são dependentes
+            // can't be paralellized, calls must be sequential 
             for(iteration = 0;
                 iteration < iteration_max && \
                 ((z_x_squared + z_y_squared) < escape_radius_squared);
@@ -192,7 +191,7 @@ void write_to_file(){
 };
 
 
-// A função é encarregada de preparar as threads e chamá-las
+// function to prepare and call threads
 void compute_mandelbrot(){
     double block_size = i_y_max / NUMTHRDS;
     double remainder = i_y_max % NUMTHRDS;
@@ -207,6 +206,7 @@ void compute_mandelbrot(){
         start = thread_data[t].end;
     }
 
+    // wait until all threads are finished
     for (int t = 0; t < NUMTHRDS; t++) {
         pthread_join(callThd[t], NULL);
     }
