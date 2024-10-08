@@ -113,10 +113,7 @@ void write_to_file(){
 };
 
 void compute_mandelbrot_aux(int i_x, int i_y, double c_y) {
-    double z_x;
-    double z_y;
-    double z_x_squared;
-    double z_y_squared;
+    double z_x, z_y, z_x_squared, z_y_squared;
     double escape_radius_squared = 4;
     double c_x; 
 
@@ -146,17 +143,12 @@ void compute_mandelbrot_aux(int i_x, int i_y, double c_y) {
 }
 
 void compute_mandelbrot_openmp(int i_y){
-    
     double c_y = c_y_min + i_y * pixel_height;
 
-    if(fabs(c_y) < pixel_height / 2){
-        c_y = 0.0;
-    };
+    if(fabs(c_y) < pixel_height / 2) {c_y = 0.0;};
     
     #pragma omp parallel for
-    for(int i_x = 0; i_x < i_x_max; i_x++) {
-        compute_mandelbrot_aux(i_x, i_y, c_y);
-    };
+    for(int i_x = 0; i_x < i_x_max; i_x++) {compute_mandelbrot_aux(i_x, i_y, c_y);};
     
 };
 
@@ -166,9 +158,7 @@ int main(int argc, char *argv[]){
     allocate_image_buffer();
     
     #pragma omp parallel for
-    for(int i_y = 0; i_y < i_y_max; i_y++) {
-       compute_mandelbrot_openmp(i_y);
-    }
+    for(int i_y = 0; i_y < i_y_max; i_y++) {compute_mandelbrot_openmp(i_y);}
 
     write_to_file();
 
