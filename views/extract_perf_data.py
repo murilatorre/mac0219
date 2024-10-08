@@ -6,6 +6,13 @@ def parse_log_file(log_file, version, region):
     with open(log_file, 'r') as f:
         content = f.read()
     
+    # Regex para extrair o comando e o input_size
+    exec_regex = re.search(r"Performance counter stats for \'(.+?)\'", content)
+    input_size = None
+    if exec_regex:
+        command = exec_regex.group(1)
+        input_size = int(command.split()[-1])  # Tamanho de entrada é o último número do comando
+    
     # Extrair as métricas usando regex
     cycles_match = re.search(r'(\d+(?:,\d+)?)\s+cpu_core/cycles/', content)
     instructions_match = re.search(r'(\d+(?:,\d+)?)\s+cpu_core/instructions/', content)
@@ -24,6 +31,7 @@ def parse_log_file(log_file, version, region):
     return {
         "version": version,
         "region": region,
+        "input_size": input_size,
         "cycles": cycles,
         "instructions": instructions,
         "branches": branches,
