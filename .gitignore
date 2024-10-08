@@ -1,2 +1,7 @@
 results
 results/*
+.venv
+.venv/*
+graphs/*
+graphs
+perf_stats.csv
