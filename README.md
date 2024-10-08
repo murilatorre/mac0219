@@ -26,4 +26,4 @@ Em seguida, para gerar os gráficos, devemos rodar:
 
 O arquivo .csv é nomeado 'perf_stats.csv' e as imagens geradas estarão na pasta `views/graphs/`.
 
-NOTA: Só é necessário preparar o ambiente virutal uma vez, após a primeira vez comece pelo passo 3. Além disso, rode `deactivate` para desativar o ambiente virtual.
+NOTA: Só é necessário preparar o ambiente virutal uma vez, após a primeira vez ignore o passo 2. Além disso, rode `deactivate` para desativar o ambiente virtual.
