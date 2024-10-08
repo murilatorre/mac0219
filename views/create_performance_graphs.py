@@ -18,7 +18,7 @@ def compute_statistics(df, metric):
 # Função para criar gráficos para uma métrica específica
 def plot_metric(stats, metric):
     plt.figure(figsize=(10, 6))
-    sns.barplot(data=stats, x='region', y='mean', hue='version', ci=None, palette='muted')
+    sns.barplot(data=stats, x='region', y='mean', hue='version', errorbar=None, palette='muted')
     
     # Adiciona os intervalos de confiança
     for index, row in stats.iterrows():
@@ -43,7 +43,7 @@ def plot_metric(stats, metric):
 # Função para criar gráficos para uma métrica específica
 def plot_metric_input_size_comparision(stats, metric):
     plt.figure(figsize=(10, 6))
-    sns.lineplot(data=stats, x='input_size', y='mean', hue='version', style='region', markers=True, ci=None, palette='muted')
+    sns.lineplot(data=stats, x='input_size', y='mean', hue='version', style='region', markers=True, errorbar=None, palette='muted')
     
     # Adiciona os intervalos de confiança
     for index, row in stats.iterrows():
