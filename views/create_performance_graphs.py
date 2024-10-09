@@ -71,7 +71,7 @@ def plot_metric_input_size_comparision(stats, metric):
 
 # Calcular estatísticas para cada métrica e gerar os gráficos
 # Adicione as métricas conforme presente no log do perf
-metrics = ['time', 'cycles', 'instructions', 'branches', 'branch_misses']
+metrics = ['time', 'cycles', 'instructions', 'branches', 'branch_misses', 'context_switches']
 for metric in metrics:
     stats = compute_statistics(df, metric)
     plot_metric(stats, metric)
