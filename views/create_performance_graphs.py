@@ -29,6 +29,7 @@ def plot_metric(stats, metric):
     plt.title(f'Média e Intervalo de Confiança (95%) para {metric}')
     plt.xlabel('Região')
     plt.ylabel(metric)
+    plt.yscale('log')
     plt.xticks(rotation=45)
     plt.tight_layout()
     plt.legend(title='Versão', loc='upper right')
@@ -55,9 +56,10 @@ def plot_metric_input_size_comparision(stats, metric):
     plt.xlabel('Tamanho da Entrada')
     plt.xscale('log',base=2) 
     plt.ylabel(metric)
+    plt.yscale('log') 
     plt.xticks(rotation=45)
     plt.tight_layout()
-    plt.legend(title='Versão e Região', loc='upper right')
+    plt.legend(title='Versão e Região', loc='best')
     plt.grid(True, linestyle='--', linewidth=0.5)
     
     # Cria a pasta de gráficos se não existir
