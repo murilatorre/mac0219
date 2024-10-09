@@ -38,7 +38,7 @@ def plot_metric(stats, metric):
     os.makedirs('graphs', exist_ok=True)
     # Salva o gráfico como uma imagem na pasta graphs
     plt.savefig(f'graphs/{metric}_comparison.png')
-    plt.show()
+    plt.close()
 
 # Função para criar gráficos para uma métrica específica
 def plot_metric_input_size_comparision(stats, metric):
@@ -53,6 +53,7 @@ def plot_metric_input_size_comparision(stats, metric):
     
     plt.title(f'Média e Intervalo de Confiança (95%) para {metric} por Tamanho de Entrada')
     plt.xlabel('Tamanho da Entrada')
+    plt.xscale('log',base=2) 
     plt.ylabel(metric)
     plt.xticks(rotation=45)
     plt.tight_layout()
@@ -63,7 +64,7 @@ def plot_metric_input_size_comparision(stats, metric):
     os.makedirs('graphs', exist_ok=True)
     # Salva o gráfico como uma imagem na pasta graphs
     plt.savefig(f'graphs/{metric}_input_size_comparison.png')
-    plt.show()
+    plt.close()
 
 
 # Calcular estatísticas para cada métrica e gerar os gráficos
