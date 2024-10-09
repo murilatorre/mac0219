@@ -2,6 +2,7 @@ results
 results/*
 .venv
 .venv/*
-graphs/*
-graphs
 perf_stats.csv
+mandelbrot_seq
+mandelbrot_pth
+mandelbrot_omp
