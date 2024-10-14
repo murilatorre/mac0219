@@ -18,6 +18,8 @@ def parse_log_file(log_file, version, region, data):
         input_size = int(command.split()[-1])
         
         # Extrair as métricas do conteúdo do relatório
+        context_match = re.search(r'(\d+(?:,\d+)?)\s+context-switches', report_content)
+        page_faults_match = re.search(r'(\d+(?:,\d+)?)\s+page-faults', report_content)
         cycles_match = re.search(r'(\d+(?:,\d+)?)\s+cpu_core/cycles/', report_content)
         instructions_match = re.search(r'(\d+(?:,\d+)?)\s+cpu_core/instructions/', report_content)
         branches_match = re.search(r'(\d+(?:,\d+)?)\s+cpu_core/branches/', report_content)
@@ -25,6 +27,8 @@ def parse_log_file(log_file, version, region, data):
         time_match = re.search(r'(\d+\.\d+)\s+seconds time elapsed\s+\(\s+\+\-\s+(\d+\.\d+)%\s+\)', report_content)
         
         # Substituir vírgulas e converter em inteiros ou floats
+        context_switches = int(context_match.group(1).replace(',', '')) if context_match else None
+        page_faults = int(page_faults_match.group(1).replace(',', '')) if page_faults_match else None
         cycles = int(cycles_match.group(1).replace(',', '')) if cycles_match else None
         instructions = int(instructions_match.group(1).replace(',', '')) if instructions_match else None
         branches = int(branches_match.group(1).replace(',', '')) if branches_match else None
@@ -36,6 +40,8 @@ def parse_log_file(log_file, version, region, data):
             "version": version,
             "region": region,
             "input_size": input_size,
+            "context_switches": context_switches,
+            "page_faults": page_faults,
             "cycles": cycles,
             "instructions": instructions,
             "branches": branches,
