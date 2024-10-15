@@ -4,7 +4,6 @@
 - [x]  Paralelizar o código com OpenMP
 - [x]  Revisar os códigos e merge
 - [x]  Realizar a simulação dos testes e coletar os dados
-- [ ]  Os gráficos têm como título 'Média e Intervalo de Confiança ...', mas esses não estão sendo calculados (não sei a razão). Devemos decidir entre renomeá-los ou consertar.
 - [ ]  Escrever o relatório
 - [ ]  Entregar
 
@@ -35,3 +34,4 @@ NOTA: Só é necessário preparar o ambiente virutal uma vez, após a primeira v
 * O número threads varia entre $$2^{0}$$ e $$2^{5}$$
 * As simulações que variam o tamanho da entrada usam o número de threads default 16;
 * As simulações que variam o número de threads usam o tamanho de entrada default 512;
+* Em alguns casos de comparações por região (gráfico de barras), não há média/intervalo de confiança. Isso ocorre porque o desvio padrão da amostra é 0.

@@ -7,23 +7,36 @@ from scipy.stats import sem
 
 # Função para calcular a média e o intervalo de confiança
 def compute_statistics(df, metric, groupby):
-    grouped = df.groupby(['version', 'region', groupby])[metric]
+    grouped = df.groupby(groupby)[metric]
     stats = grouped.agg(['mean', sem]).reset_index()
     stats['ci95_hi'] = stats['mean'] + 1.96 * stats['sem']
     stats['ci95_lo'] = stats['mean'] - 1.96 * stats['sem']
     return stats
 
+
 # Função para criar gráficos para uma métrica específica
-def plot_metric(stats, metric):
+def plot_metric(df, metric):
+    stats = compute_statistics(df, metric, ['version', 'region'])
+
     plt.figure(figsize=(10, 6))
-    sns.barplot(data=stats, x='region', y='mean', hue='version', errorbar=None, palette='muted')
+    bar_plot = sns.barplot(data=stats, x='region', y='mean', hue='version', palette='muted', errorbar=None)
     
-    # Adiciona os intervalos de confiança
+    # Adiciona os intervalos de confiança para cada versão e região
     for index, row in stats.iterrows():
-        plt.errorbar(x=row['region'], y=row['mean'],
-                     yerr=[[row['mean'] - row['ci95_lo']], [row['ci95_hi'] - row['mean']]],
-                     fmt='none', c='black', capsize=5)
-    
+        region_index = stats['region'].unique().tolist().index(row['region'])
+        version_offset = {'mandelbrot_omp': -0.25, 'mandelbrot_pth': 0, 'mandelbrot_seq': 0.25}
+        x_position = region_index + version_offset[row['version']]
+        
+        plt.errorbar(
+            x=x_position, 
+            y=row['mean'],
+            yerr=[[row['mean'] - row['ci95_lo']], [row['ci95_hi'] - row['mean']]],
+            fmt='none', 
+            c='black', 
+            capsize=5, 
+            label='_nolegend_'
+        )
+
     plt.title(f'Média e Intervalo de Confiança (95%) para {metric}')
     plt.xlabel('Região')
     plt.ylabel(metric)
@@ -41,8 +54,10 @@ def plot_metric(stats, metric):
 
 # Função para criar gráficos para uma métrica específica em relação ao tamanho da entrada
 def plot_metric_input_size_comparision(stats, metric):
+    stats = compute_statistics(df, metric, ['version', 'input_size'])
+
     plt.figure(figsize=(10, 6))
-    sns.lineplot(data=stats, x='input_size', y='mean', hue='version', style='region', markers=True, errorbar=None, palette='muted')
+    sns.lineplot(data=stats, x='input_size', y='mean', hue='version', markers=True, errorbar=None, palette='muted')
     
     # Adiciona os intervalos de confiança
     for index, row in stats.iterrows():
@@ -57,7 +72,7 @@ def plot_metric_input_size_comparision(stats, metric):
     plt.yscale('log') 
     plt.xticks(rotation=45)
     plt.tight_layout()
-    plt.legend(title='Versão e Região', loc='best')
+    plt.legend(title='Versão', loc='best')
     plt.grid(True, linestyle='--', linewidth=0.5)
     
     # Cria a pasta de gráficos se não existir
@@ -68,9 +83,11 @@ def plot_metric_input_size_comparision(stats, metric):
 
 
 # Função para criar gráficos para uma métrica específica em relação ao número de threads
-def plot_metric_num_threads_comparision(stats, metric):
+def plot_metric_num_threads_comparision(df, metric):
+    stats = compute_statistics(df, metric, ['version', 'threads'])
+
     plt.figure(figsize=(10, 6))
-    sns.lineplot(data=stats, x='threads', y='mean', hue='version', style='region', markers=True, errorbar=None, palette='muted')
+    sns.lineplot(data=stats, x='threads', y='mean', hue='version', markers=True, errorbar=None, palette='muted')
     
     # Adiciona os intervalos de confiança
     for index, row in stats.iterrows():
@@ -85,7 +102,7 @@ def plot_metric_num_threads_comparision(stats, metric):
     plt.yscale('log') 
     plt.xticks(rotation=45)
     plt.tight_layout()
-    plt.legend(title='Versão e Região', loc='best')
+    plt.legend(title='Versão', loc='best')
     plt.grid(True, linestyle='--', linewidth=0.5)
     
     # Cria a pasta de gráficos se não existir
@@ -99,20 +116,16 @@ def plot_metric_num_threads_comparision(stats, metric):
 # Carregar os dados do CSV
 df = pd.read_csv('perf_stats.csv')
 
+# Carregar os dados do CSV do número de threads
+threads_df = pd.read_csv('perf_stats_threads.csv')
+
 # Calcular estatísticas para cada métrica e gerar os gráficos
 # Adicione as métricas conforme presente no log do perf
 metrics = ['time', 'cycles', 'instructions', 'branches', 'branch_misses', 'context_switches']
 for metric in metrics:
-    stats = compute_statistics(df, metric, 'input_size')
-    plot_metric(stats, metric)
-    plot_metric_input_size_comparision(stats, metric)
-
-
-# Carregar os dados do CSV do número de threads
-df = pd.read_csv('perf_stats_threads.csv')
-for metric in metrics:
-    stats = compute_statistics(df, metric, 'threads')
-    plot_metric_num_threads_comparision(stats, metric)
+    plot_metric(df, metric)
+    plot_metric_input_size_comparision(df, metric)
+    plot_metric_num_threads_comparision(threads_df, metric)
 
 
 print("Gráficos gerados com sucesso e salvos na pasta 'graphs'!")
