@@ -14,8 +14,8 @@ def compute_statistics(df, metric, groupby):
     return stats
 
 
-# Função para criar gráficos para uma métrica específica
-def plot_metric(df, metric):
+# Função para criar gráficos para uma métrica específica em relação a região
+def plot_metric_region_comparison(df, metric):
     stats = compute_statistics(df, metric, ['version', 'region'])
 
     plt.figure(figsize=(10, 6))
@@ -47,27 +47,30 @@ def plot_metric(df, metric):
     plt.grid(True, linestyle='--', linewidth=0.5)
     
     # Cria a pasta de gráficos se não existir
-    os.makedirs('graphs', exist_ok=True)
-    # Salva o gráfico como uma imagem na pasta graphs
-    plt.savefig(f'graphs/{metric}_comparison.png')
+    os.makedirs('graphs/regions', exist_ok=True)
+    plt.savefig(f'graphs/regions/{metric}_comparison.png')
     plt.close()
 
 # Função para criar gráficos para uma métrica específica em relação ao tamanho da entrada
-def plot_metric_input_size_comparision(stats, metric):
+def plot_metric_input_size_comparison(df, metric):
     stats = compute_statistics(df, metric, ['version', 'input_size'])
 
     plt.figure(figsize=(10, 6))
     sns.lineplot(data=stats, x='input_size', y='mean', hue='version', markers=True, errorbar=None, palette='muted')
     
-    # Adiciona os intervalos de confiança
-    for index, row in stats.iterrows():
-        plt.errorbar(x=row['input_size'], y=row['mean'],
-                     yerr=[[row['mean'] - row['ci95_lo']], [row['ci95_hi'] - row['mean']]],
-                     fmt='none', c='black', capsize=5)
+    # Adiciona os intervalos de confiança, com deslocamento e cores diferenciadas
+    colors = sns.color_palette('muted', n_colors=len(stats['version'].unique())) 
+    for idx, (version, color) in enumerate(zip(stats['version'].unique(), colors)):
+        version_data = stats[stats['version'] == version]
+        
+        for i, row in version_data.iterrows():
+            plt.errorbar(x=row['input_size'], y=row['mean'],
+                         yerr=[[row['mean'] - row['ci95_lo']], [row['ci95_hi'] - row['mean']]],
+                         fmt='none', ecolor=color, capsize=6, alpha=0.8)
     
     plt.title(f'Média e Intervalo de Confiança (95%) para {metric} por Tamanho de Entrada')
     plt.xlabel('Tamanho da Entrada')
-    plt.xscale('log',base=2) 
+    plt.xscale('log', base=2) 
     plt.ylabel(metric)
     plt.yscale('log') 
     plt.xticks(rotation=45)
@@ -76,25 +79,28 @@ def plot_metric_input_size_comparision(stats, metric):
     plt.grid(True, linestyle='--', linewidth=0.5)
     
     # Cria a pasta de gráficos se não existir
-    os.makedirs('graphs', exist_ok=True)
-    # Salva o gráfico como uma imagem na pasta graphs
-    plt.savefig(f'graphs/{metric}_input_size_comparison.png')
+    os.makedirs('graphs/input_size', exist_ok=True)
+    plt.savefig(f'graphs/input_size/{metric}_input_size_comparison.png')
     plt.close()
 
-
 # Função para criar gráficos para uma métrica específica em relação ao número de threads
-def plot_metric_num_threads_comparision(df, metric):
+def plot_metric_num_threads_comparison(df, metric):
     stats = compute_statistics(df, metric, ['version', 'threads'])
 
     plt.figure(figsize=(10, 6))
     sns.lineplot(data=stats, x='threads', y='mean', hue='version', markers=True, errorbar=None, palette='muted')
-    
-    # Adiciona os intervalos de confiança
-    for index, row in stats.iterrows():
-        plt.errorbar(x=row['threads'], y=row['mean'],
-                     yerr=[[row['mean'] - row['ci95_lo']], [row['ci95_hi'] - row['mean']]],
-                     fmt='none', c='black', capsize=5)
-    
+   
+    # Adiciona os intervalos de confiança, com deslocamento e cores diferenciadas
+    colors = sns.color_palette('muted', n_colors=len(stats['version'].unique()))
+    for idx, (version, color) in enumerate(zip(stats['version'].unique(), colors)):
+        version_data = stats[stats['version'] == version]
+        
+        for i, row in version_data.iterrows():
+            plt.errorbar(x=row['threads'], y=row['mean'],
+                         yerr=[[row['mean'] - row['ci95_lo']], [row['ci95_hi'] - row['mean']]],
+                         fmt='none', ecolor=color, capsize=6, alpha=0.8)
+
+
     plt.title(f'Média e Intervalo de Confiança (95%) para {metric} por Número de Threads')
     plt.xlabel('Número de Threads')
     plt.xscale('log',base=2) 
@@ -106,26 +112,26 @@ def plot_metric_num_threads_comparision(df, metric):
     plt.grid(True, linestyle='--', linewidth=0.5)
     
     # Cria a pasta de gráficos se não existir
-    os.makedirs('graphs', exist_ok=True)
-    # Salva o gráfico como uma imagem na pasta graphs
-    plt.savefig(f'graphs/{metric}_num_threads_comparison.png')
+    os.makedirs('graphs/num_threads', exist_ok=True)
+    plt.savefig(f'graphs/num_threads/{metric}_num_threads_comparison.png')
     plt.close()
 
+def main():
+    os.makedirs('graphs', exist_ok=True)
+    
+    # Carregar os dados do CSV
+    df = pd.read_csv('perf_stats.csv')
+    threads_df = pd.read_csv('perf_stats_threads.csv')
+
+    # Calcular estatísticas para cada métrica e gerar os gráficos
+    # Adicione as métricas conforme presente no log do perf
+    metrics = ['time', 'cycles', 'instructions', 'branches', 'branch_misses', 'context_switches']
+    for metric in metrics:
+        plot_metric_region_comparison(df, metric)
+        plot_metric_input_size_comparison(df, metric)
+        plot_metric_num_threads_comparison(threads_df, metric)
 
 
-# Carregar os dados do CSV
-df = pd.read_csv('perf_stats.csv')
+    print("Gráficos gerados com sucesso e salvos na pasta 'graphs'!")
 
-# Carregar os dados do CSV do número de threads
-threads_df = pd.read_csv('perf_stats_threads.csv')
-
-# Calcular estatísticas para cada métrica e gerar os gráficos
-# Adicione as métricas conforme presente no log do perf
-metrics = ['time', 'cycles', 'instructions', 'branches', 'branch_misses', 'context_switches']
-for metric in metrics:
-    plot_metric(df, metric)
-    plot_metric_input_size_comparision(df, metric)
-    plot_metric_num_threads_comparision(threads_df, metric)
-
-
-print("Gráficos gerados com sucesso e salvos na pasta 'graphs'!")
+main()
