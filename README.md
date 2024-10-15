@@ -4,6 +4,7 @@
 - [x]  Paralelizar o código com OpenMP
 - [x]  Revisar os códigos e merge
 - [x]  Realizar a simulação dos testes e coletar os dados
+- [ ]  Os gráficos têm como título 'Média e Intervalo de Confiança ...', mas esses não estão sendo calculados (não sei a razão). Devemos decidir entre renomeá-los ou consertar.
 - [ ]  Escrever o relatório
 - [ ]  Entregar
 
@@ -27,3 +28,10 @@ Em seguida, para gerar os gráficos, devemos rodar:
 O arquivo .csv é nomeado 'perf_stats.csv' e as imagens geradas estarão na pasta `views/graphs/`.
 
 NOTA: Só é necessário preparar o ambiente virutal uma vez, após a primeira vez ignore o passo 2. Além disso, rode `deactivate` para desativar o ambiente virtual.
+
+### Informações sobre os resultados
+
+* O tamanho da entrada varia entre $$2^{4}$$ e $$2^{11}$$
+* O número threads varia entre $$2^{0}$$ e $$2^{5}$$
+* As simulações que variam o tamanho da entrada usam o número de threads default 16;
+* As simulações que variam o número de threads usam o tamanho de entrada default 512;
