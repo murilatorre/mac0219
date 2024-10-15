@@ -3,7 +3,7 @@
 #include <math.h>
 #include <omp.h>
 
-
+#define DEFAULT_NUMTHRDS 16
 int NUMTHRDS;
 
 double c_x_min;
@@ -77,10 +77,9 @@ void init(int argc, char *argv[]){
         pixel_width       = (c_x_max - c_x_min) / i_x_max;
         pixel_height      = (c_y_max - c_y_min) / i_y_max;
 
-        if(argc > 7) {
-            sscanf(argv[6], "%d", &NUMTHRDS);
-            omp_set_num_threads(NUMTHRDS);
-        }
+        if(argc < 7) NUMTHRDS = DEFAULT_NUMTHRDS;
+        else sscanf(argv[6], "%d", &NUMTHRDS);
+        
     };
 };
 
@@ -165,8 +164,12 @@ int main(int argc, char *argv[]){
 
     // allocate_image_buffer();
 
+    omp_set_num_threads(NUMTHRDS);
+
     #pragma omp parallel for
-    for(int i_y = 0; i_y < i_y_max; i_y++) {compute_mandelbrot_openmp(i_y);}
+    for (int i_y = 0; i_y < i_y_max; i_y++) {
+        compute_mandelbrot_openmp(i_y);
+    }
 
     // write_to_file();
 

@@ -151,8 +151,9 @@ void init(int argc, char *argv[]){
         pixel_width       = (c_x_max - c_x_min) / i_x_max;
         pixel_height      = (c_y_max - c_y_min) / i_y_max;
 
-        if(argc > 7) sscanf(argv[6], "%d", &NUMTHRDS);
-        else NUMTHRDS = DEFAULT_NUMTHRDS;
+        if(argc < 7) NUMTHRDS = DEFAULT_NUMTHRDS;
+        else sscanf(argv[6], "%d", &NUMTHRDS);
+   
     };
 };
 
