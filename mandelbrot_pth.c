@@ -22,9 +22,8 @@ typedef struct {
 
 
 /* Define globally accessible variables */
-#define NUMTHRDS 16
-pthread_t callThd[NUMTHRDS];
-for_data thread_data[NUMTHRDS];
+#define DEFAULT_NUMTHRDS 16
+int NUMTHRDS;
 
 double c_x_min;
 double c_x_max;
@@ -151,6 +150,9 @@ void init(int argc, char *argv[]){
 
         pixel_width       = (c_x_max - c_x_min) / i_x_max;
         pixel_height      = (c_y_max - c_y_min) / i_y_max;
+
+        if(argc > 7) sscanf(argv[6], "%d", &NUMTHRDS);
+        else NUMTHRDS = DEFAULT_NUMTHRDS;
     };
 };
 
@@ -193,6 +195,9 @@ void write_to_file(){
 
 // function to prepare and call threads
 void compute_mandelbrot(){
+    pthread_t callThd[NUMTHRDS];
+    for_data thread_data[NUMTHRDS];
+
     double block_size = i_y_max / NUMTHRDS;
     double remainder = i_y_max % NUMTHRDS;
     double start = 0;

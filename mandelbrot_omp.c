@@ -3,6 +3,9 @@
 #include <math.h>
 #include <omp.h>
 
+
+int NUMTHRDS;
+
 double c_x_min;
 double c_x_max;
 double c_y_min;
@@ -73,6 +76,11 @@ void init(int argc, char *argv[]){
 
         pixel_width       = (c_x_max - c_x_min) / i_x_max;
         pixel_height      = (c_y_max - c_y_min) / i_y_max;
+
+        if(argc > 7) {
+            sscanf(argv[6], "%d", &NUMTHRDS);
+            omp_set_num_threads(NUMTHRDS);
+        }
     };
 };
 
@@ -156,7 +164,7 @@ int main(int argc, char *argv[]){
     init(argc, argv);
 
     // allocate_image_buffer();
-    
+
     #pragma omp parallel for
     for(int i_y = 0; i_y < i_y_max; i_y++) {compute_mandelbrot_openmp(i_y);}
 
