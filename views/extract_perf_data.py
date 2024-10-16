@@ -15,12 +15,17 @@ def parse_log_file(log_file, version, region, data, comparison):
         report_content = match.group(2)
         
         # Extrair o tamanho de entrada do comando e o número de threads
-        if (comparison == 'input_size'):
-            input_size = int(command.split()[-1])
-            threads = '-'
-        else:
+        io_aloc = 'sem'
+        if (comparison == 'threads'):
             input_size = int(command.split()[-2])
             threads = int(command.split()[-1])
+        elif (comparison == 'io_aloc'):
+            input_size = int(command.split()[-2])
+            threads = '-'
+            io_aloc = 'com' if int(command.split()[-1]) == 1 else 'sem'
+        else:
+            input_size = int(command.split()[-1])
+            threads = '-' if (command.split()[0] == './mandelbrot_seq') else 16
 
         # Extrair as métricas do conteúdo do relatório
         context_match = re.search(r'(\d+(?:,\d+)?)\s+context-switches', report_content)
@@ -46,6 +51,7 @@ def parse_log_file(log_file, version, region, data, comparison):
             "region": region,
             "input_size": input_size,
             "threads": threads,
+            "io_aloc": io_aloc,
             "context_switches": context_switches,
             "page_faults": page_faults,
             "cycles": cycles,
@@ -79,7 +85,22 @@ def process_logs(log_directory, comparison, output_file='perf_stats.csv'):
     
     write_to_csv(data, output_file)
 
+def process_logs_seq(log_directory, comparison, output_file='perf_stats_io_aloc.csv'):
+    data = []
+    # os logs estão organizados em diretórios por tipo
+    for version in ['without', 'with']:
+        version_path = os.path.join(log_directory, version)
+        
+        for region in ['elephant', 'full', 'seahorse', 'triple_spiral']:
+            log_file = os.path.join(version_path, f'{region}.log')
+            if os.path.exists(log_file):
+                log_data = parse_log_file(log_file, 'mandelbrot_seq', region, data, comparison)
+            else:
+                print(f"Log file {log_file} not found!")    
+    write_to_csv(data, output_file)
+
 # Chamar a função com o diretório onde estão os logs
 process_logs('../results/input_size/', 'input_size')
 process_logs('../results/threads/', 'threads', 'perf_stats_threads.csv')
+process_logs_seq('../results/io_aloc/', 'io_aloc')
 

@@ -1,202 +1,206 @@
 
  Performance counter stats for './mandelbrot_seq -0.8 -0.7 0.05 0.15 16' (10 runs):
 
-              1.41 msec task-clock                       #    0.764 CPUs utilized               ( +-  3.85% )
+              1.14 msec task-clock                       #    0.703 CPUs utilized               ( +-  5.82% )
                  0      context-switches                 #    0.000 /sec                      
                  0      cpu-migrations                   #    0.000 /sec                      
-                64      page-faults                      #   45.538 K/sec                       ( +-  0.36% )
-         2,161,698      cpu_atom/cycles/                 #    1.538 GHz                         ( +- 11.57% )  (40.97%)
-           640,398      cpu_core/cycles/                 #    0.456 GHz                         ( +- 50.98% )  (56.76%)
-         2,060,919      cpu_atom/instructions/           #    0.95  insn per cycle              ( +- 11.42% )  (43.24%)
-           806,742      cpu_core/instructions/           #    0.37  insn per cycle              ( +- 51.11% )  (56.76%)
-           294,649      cpu_atom/branches/               #  209.652 M/sec                       ( +- 11.13% )  (43.24%)
-            95,364      cpu_core/branches/               #   67.855 M/sec                       ( +- 50.93% )  (56.76%)
-             7,678      cpu_atom/branch-misses/          #    2.61% of all branches             ( +- 13.02% )  (43.24%)
-             1,784      cpu_core/branch-misses/          #    0.61% of all branches             ( +- 55.48% )  (56.76%)
-             TopdownL1 (cpu_core)                 #     53.1 %  tma_backend_bound      
-                                                  #      4.6 %  tma_bad_speculation    
-                                                  #     20.7 %  tma_frontend_bound     
-                                                  #     21.6 %  tma_retiring             ( +- 50.98% )  (56.76%)
-             TopdownL1 (cpu_atom)                 #      7.3 %  tma_bad_speculation    
-                                                  #     22.0 %  tma_retiring             ( +- 11.20% )  (43.24%)
-                                                  #     46.7 %  tma_backend_bound      
-                                                  #     46.7 %  tma_backend_bound_aux  
-                                                  #     24.0 %  tma_frontend_bound       ( +- 11.58% )  (43.24%)
+                59      page-faults                      #   51.814 K/sec                       ( +-  0.52% )
+     <not counted>      cpu_atom/cycles/                                                        ( +- 47.34% )  (0.00%)
+         1,182,491      cpu_core/cycles/                 #    1.038 GHz                         ( +- 22.00% )
+     <not counted>      cpu_atom/instructions/                                                  ( +- 48.94% )  (0.00%)
+         1,529,581      cpu_core/instructions/           #    2.12  insn per cycle              ( +- 21.83% )
+     <not counted>      cpu_atom/branches/                                                      ( +- 48.08% )  (0.00%)
+           195,434      cpu_core/branches/               #  171.630 M/sec                       ( +- 21.83% )
+     <not counted>      cpu_atom/branch-misses/                                                 ( +- 45.11% )  (0.00%)
+             3,581      cpu_core/branch-misses/          #    4.10% of all branches             ( +- 22.44% )
+             TopdownL1 (cpu_core)                 #     49.2 %  tma_backend_bound      
+                                                  #      5.5 %  tma_bad_speculation    
+                                                  #     21.9 %  tma_frontend_bound     
+                                                  #     23.3 %  tma_retiring             ( +- 22.02% )
 
-         0.0018386 +- 0.0000710 seconds time elapsed  ( +-  3.86% )
+         0.0016199 +- 0.0000878 seconds time elapsed  ( +-  5.42% )
 
 
  Performance counter stats for './mandelbrot_seq -0.8 -0.7 0.05 0.15 32' (10 runs):
 
-              2.77 msec task-clock                       #    0.866 CPUs utilized               ( +-  4.26% )
+              2.29 msec task-clock                       #    0.845 CPUs utilized               ( +-  2.20% )
                  0      context-switches                 #    0.000 /sec                      
                  0      cpu-migrations                   #    0.000 /sec                      
-                72      page-faults                      #   26.012 K/sec                       ( +-  0.31% )
-         2,763,239      cpu_atom/cycles/                 #    0.998 GHz                         ( +- 33.79% )  (36.59%)
-     <not counted>      cpu_core/cycles/                                                        ( +- 16.80% )  (0.00%)
-         2,684,686      cpu_atom/instructions/           #    0.97  insn per cycle              ( +- 33.97% )  (68.28%)
-     <not counted>      cpu_core/instructions/                                                  ( +- 16.91% )  (0.00%)
-           346,233      cpu_atom/branches/               #  125.088 M/sec                       ( +- 33.65% )  (68.24%)
-     <not counted>      cpu_core/branches/                                                      ( +- 16.83% )  (0.00%)
-             7,290      cpu_atom/branch-misses/          #    2.11% of all branches             ( +- 40.25% )  (96.15%)
-     <not counted>      cpu_core/branch-misses/                                                 ( +- 21.53% )  (0.00%)
-             TopdownL1 (cpu_atom)                 #      1.7 %  tma_bad_speculation    
-                                                  #     21.8 %  tma_retiring             ( +- 33.56% )
-                                                  #     58.6 %  tma_backend_bound      
-                                                  #     58.6 %  tma_backend_bound_aux  
-                                                  #     17.9 %  tma_frontend_bound       ( +- 33.86% )
+                59      page-faults                      #   25.775 K/sec                       ( +-  0.40% )
+     <not counted>      cpu_atom/cycles/                                                        ( +-100.00% )  (0.00%)
+         4,174,623      cpu_core/cycles/                 #    1.824 GHz                         ( +-  1.13% )
+     <not counted>      cpu_atom/instructions/                                                  ( +-100.00% )  (0.00%)
+         5,614,728      cpu_core/instructions/           #   13.67  insn per cycle              ( +-  0.65% )
+     <not counted>      cpu_atom/branches/                                                      ( +-100.00% )  (0.00%)
+           535,975      cpu_core/branches/               #  234.153 M/sec                       ( +-  0.27% )
+     <not counted>      cpu_atom/branch-misses/                                                 ( +-100.03% )  (0.00%)
+             5,935      cpu_core/branch-misses/          #   14.47% of all branches             ( +-  2.94% )
+             TopdownL1 (cpu_core)                 #     65.2 %  tma_backend_bound      
+                                                  #      2.7 %  tma_bad_speculation    
+                                                  #      9.0 %  tma_frontend_bound     
+                                                  #     23.1 %  tma_retiring             ( +-  1.32% )
 
-          0.003197 +- 0.000132 seconds time elapsed  ( +-  4.14% )
+         0.0027097 +- 0.0000923 seconds time elapsed  ( +-  3.41% )
 
 
  Performance counter stats for './mandelbrot_seq -0.8 -0.7 0.05 0.15 64' (10 runs):
 
-              9.65 msec task-clock                       #    0.951 CPUs utilized               ( +-  4.90% )
+              8.05 msec task-clock                       #    0.935 CPUs utilized               ( +-  5.33% )
                  0      context-switches                 #    0.000 /sec                      
                  0      cpu-migrations                   #    0.000 /sec                      
-               102      page-faults                      #   10.568 K/sec                       ( +-  0.21% )
-        15,560,157      cpu_atom/cycles/                 #    1.612 GHz                         ( +- 16.92% )  (8.99%)
-        10,316,572      cpu_core/cycles/                 #    1.069 GHz                         ( +- 27.63% )  (66.47%)
-        16,156,799      cpu_atom/instructions/           #    1.04  insn per cycle              ( +- 16.83% )  (21.22%)
-        14,925,175      cpu_core/instructions/           #    0.96  insn per cycle              ( +- 27.74% )  (66.47%)
-         1,495,543      cpu_atom/branches/               #  154.953 M/sec                       ( +- 16.74% )  (33.07%)
-         1,415,615      cpu_core/branches/               #  146.671 M/sec                       ( +- 28.66% )  (66.47%)
-            12,170      cpu_atom/branch-misses/          #    0.81% of all branches             ( +- 18.39% )  (33.53%)
-            11,528      cpu_core/branch-misses/          #    0.77% of all branches             ( +- 33.50% )  (66.47%)
-             TopdownL1 (cpu_core)                 #     66.9 %  tma_backend_bound      
-                                                  #      2.0 %  tma_bad_speculation    
-                                                  #      6.7 %  tma_frontend_bound     
-                                                  #     24.4 %  tma_retiring             ( +- 27.63% )  (66.47%)
-             TopdownL1 (cpu_atom)                 #     -2.7 %  tma_bad_speculation    
-                                                  #     21.5 %  tma_retiring             ( +- 16.84% )  (33.53%)
-                                                  #     77.0 %  tma_backend_bound      
-                                                  #     77.0 %  tma_backend_bound_aux  
-                                                  #      4.2 %  tma_frontend_bound       ( +- 16.92% )  (33.53%)
+                59      page-faults                      #    7.329 K/sec                       ( +-  0.36% )
+         6,428,706      cpu_atom/cycles/                 #    0.799 GHz                         ( +- 41.85% )  (1.05%)
+        13,260,130      cpu_core/cycles/                 #    1.647 GHz                         ( +- 11.81% )  (85.49%)
+         5,979,385      cpu_atom/instructions/           #    0.93  insn per cycle              ( +- 42.20% )  (14.22%)
+        18,143,646      cpu_core/instructions/           #    2.82  insn per cycle              ( +- 11.77% )  (85.49%)
+           590,533      cpu_atom/branches/               #   73.352 M/sec                       ( +- 40.91% )  (14.51%)
+         1,452,553      cpu_core/branches/               #  180.427 M/sec                       ( +- 11.74% )  (85.49%)
+            12,770      cpu_atom/branch-misses/          #    2.16% of all branches             ( +- 51.10% )  (14.51%)
+             8,499      cpu_core/branch-misses/          #    1.44% of all branches             ( +- 13.43% )  (85.49%)
+             TopdownL1 (cpu_core)                 #     73.1 %  tma_backend_bound      
+                                                  #      1.2 %  tma_bad_speculation    
+                                                  #      2.7 %  tma_frontend_bound     
+                                                  #     23.0 %  tma_retiring             ( +- 11.81% )  (85.49%)
+             TopdownL1 (cpu_atom)                 #     -0.6 %  tma_bad_speculation    
+                                                  #     19.4 %  tma_retiring             ( +- 41.60% )  (14.51%)
+                                                  #     69.1 %  tma_backend_bound      
+                                                  #     69.1 %  tma_backend_bound_aux  
+                                                  #     12.1 %  tma_frontend_bound       ( +- 41.45% )  (14.51%)
 
-          0.010150 +- 0.000489 seconds time elapsed  ( +-  4.82% )
+          0.008610 +- 0.000458 seconds time elapsed  ( +-  5.32% )
 
 
  Performance counter stats for './mandelbrot_seq -0.8 -0.7 0.05 0.15 128' (10 runs):
 
-             29.02 msec task-clock                       #    0.981 CPUs utilized               ( +-  1.45% )
-                 1      context-switches                 #   34.460 /sec                      
-                 1      cpu-migrations                   #   34.460 /sec                      
-               222      page-faults                      #    7.650 K/sec                       ( +-  0.12% )
-        58,210,172      cpu_atom/cycles/                 #    2.006 GHz                         ( +-  2.85% )  (1.97%)
-        61,491,786      cpu_core/cycles/                 #    2.119 GHz                         ( +-  2.02% )  (94.16%)
-        65,744,693      cpu_atom/instructions/           #    1.13  insn per cycle              ( +-  8.13% )  (5.46%)
-        88,848,853      cpu_core/instructions/           #    1.53  insn per cycle              ( +-  2.17% )  (94.16%)
-         8,186,712      cpu_atom/branches/               #  282.118 M/sec                       ( +- 13.87% )  (5.84%)
-         7,320,008      cpu_core/branches/               #  252.251 M/sec                       ( +-  2.78% )  (94.16%)
-            70,269      cpu_atom/branch-misses/          #    0.86% of all branches             ( +- 33.12% )  (5.84%)
-            25,411      cpu_core/branch-misses/          #    0.31% of all branches             ( +-  4.33% )  (94.16%)
-             TopdownL1 (cpu_core)                 #     73.4 %  tma_backend_bound      
+             29.49 msec task-clock                       #    0.979 CPUs utilized               ( +-  3.41% )
+                 0      context-switches                 #    0.000 /sec                      
+                 0      cpu-migrations                   #    0.000 /sec                      
+                59      page-faults                      #    2.001 K/sec                       ( +-  0.28% )
+        41,913,268      cpu_atom/cycles/                 #    1.421 GHz                         ( +- 22.00% )  (24.27%)
+        60,893,281      cpu_core/cycles/                 #    2.065 GHz                         ( +-  3.97% )  (61.49%)
+        38,215,401      cpu_atom/instructions/           #    0.91  insn per cycle              ( +- 23.60% )  (31.39%)
+        83,920,782      cpu_core/instructions/           #    2.00  insn per cycle              ( +-  3.98% )  (61.49%)
+         3,250,458      cpu_atom/branches/               #  110.216 M/sec                       ( +- 21.86% )  (34.53%)
+         6,397,263      cpu_core/branches/               #  216.917 M/sec                       ( +-  3.93% )  (61.49%)
+            42,715      cpu_atom/branch-misses/          #    1.31% of all branches             ( +- 58.01% )  (34.94%)
+            25,121      cpu_core/branch-misses/          #    0.77% of all branches             ( +-  4.28% )  (61.49%)
+             TopdownL1 (cpu_core)                 #     75.0 %  tma_backend_bound      
                                                   #      0.8 %  tma_bad_speculation    
-                                                  #      1.7 %  tma_frontend_bound     
-                                                  #     24.1 %  tma_retiring             ( +-  2.01% )  (94.16%)
-             TopdownL1 (cpu_atom)                 #      1.4 %  tma_bad_speculation    
-                                                  #     23.9 %  tma_retiring             ( +-  7.58% )  (5.84%)
-                                                  #     65.6 %  tma_backend_bound      
-                                                  #     65.6 %  tma_backend_bound_aux  
-                                                  #      9.0 %  tma_frontend_bound       ( +-  2.96% )  (5.84%)
+                                                  #      1.1 %  tma_frontend_bound     
+                                                  #     23.1 %  tma_retiring             ( +-  3.93% )  (61.49%)
+             TopdownL1 (cpu_atom)                 #      2.7 %  tma_bad_speculation    
+                                                  #     18.9 %  tma_retiring             ( +- 22.84% )  (34.94%)
+                                                  #     71.3 %  tma_backend_bound      
+                                                  #     71.3 %  tma_backend_bound_aux  
+                                                  #      7.1 %  tma_frontend_bound       ( +- 22.03% )  (34.94%)
 
-          0.029592 +- 0.000423 seconds time elapsed  ( +-  1.43% )
+           0.03013 +- 0.00104 seconds time elapsed  ( +-  3.45% )
 
 
  Performance counter stats for './mandelbrot_seq -0.8 -0.7 0.05 0.15 256' (10 runs):
 
-            105.55 msec task-clock                       #    0.993 CPUs utilized               ( +-  0.83% )
-                 1      context-switches                 #    9.474 /sec                        ( +- 22.11% )
-                 1      cpu-migrations                   #    9.474 /sec                        ( +- 14.91% )
-               703      page-faults                      #    6.660 K/sec                       ( +-  0.03% )
-       187,328,235      cpu_atom/cycles/                 #    1.775 GHz                         ( +- 12.39% )  (14.93%)
-       227,526,014      cpu_core/cycles/                 #    2.156 GHz                         ( +-  0.89% )  (79.46%)
-       227,101,733      cpu_atom/instructions/           #    1.21  insn per cycle              ( +- 13.87% )  (17.74%)
-       329,065,502      cpu_core/instructions/           #    1.76  insn per cycle              ( +-  0.73% )  (79.46%)
-        28,479,236      cpu_atom/branches/               #  269.810 M/sec                       ( +- 14.07% )  (17.73%)
-        26,695,977      cpu_core/branches/               #  252.916 M/sec                       ( +-  1.01% )  (79.46%)
-           186,419      cpu_atom/branch-misses/          #    0.65% of all branches             ( +- 51.23% )  (17.73%)
-            71,531      cpu_core/branch-misses/          #    0.25% of all branches             ( +-  0.90% )  (79.46%)
-             TopdownL1 (cpu_core)                 #     74.4 %  tma_backend_bound      
-                                                  #      0.5 %  tma_bad_speculation    
-                                                  #      1.0 %  tma_frontend_bound     
-                                                  #     24.2 %  tma_retiring             ( +-  0.89% )  (79.46%)
-             TopdownL1 (cpu_atom)                 #      1.4 %  tma_bad_speculation    
-                                                  #     27.1 %  tma_retiring             ( +- 13.75% )  (17.74%)
-                                                  #     61.9 %  tma_backend_bound      
-                                                  #     61.9 %  tma_backend_bound_aux  
-                                                  #      9.7 %  tma_frontend_bound       ( +- 11.36% )  (18.57%)
+            101.97 msec task-clock                       #    0.990 CPUs utilized               ( +-  3.91% )
+                 1      context-switches                 #    9.807 /sec                        ( +- 42.69% )
+                 1      cpu-migrations                   #    9.807 /sec                        ( +- 29.81% )
+                59      page-faults                      #  578.607 /sec                        ( +-  0.40% )
+       133,387,580      cpu_atom/cycles/                 #    1.308 GHz                         ( +- 22.24% )  (0.43%)
+       211,751,391      cpu_core/cycles/                 #    2.077 GHz                         ( +-  0.51% )  (99.45%)
+       106,345,583      cpu_atom/instructions/           #    0.80  insn per cycle              ( +- 23.37% )  (0.55%)
+       292,594,908      cpu_core/instructions/           #    2.19  insn per cycle              ( +-  0.51% )  (99.45%)
+        11,966,967      cpu_atom/branches/               #  117.359 M/sec                       ( +- 22.88% )  (0.55%)
+        22,024,645      cpu_core/branches/               #  215.993 M/sec                       ( +-  0.48% )  (99.45%)
+           349,239      cpu_atom/branch-misses/          #    2.92% of all branches             ( +- 37.69% )  (0.55%)
+            70,074      cpu_core/branch-misses/          #    0.59% of all branches             ( +-  0.90% )  (99.45%)
+             TopdownL1 (cpu_core)                 #     75.6 %  tma_backend_bound      
+                                                  #      0.6 %  tma_bad_speculation    
+                                                  #      0.7 %  tma_frontend_bound     
+                                                  #     23.1 %  tma_retiring             ( +-  0.51% )  (99.45%)
+             TopdownL1 (cpu_atom)                 #      5.1 %  tma_bad_speculation    
+                                                  #     17.8 %  tma_retiring             ( +- 22.53% )  (0.55%)
+                                                  #     56.9 %  tma_backend_bound      
+                                                  #     56.9 %  tma_backend_bound_aux  
+                                                  #     20.3 %  tma_frontend_bound       ( +- 22.18% )  (0.55%)
 
-          0.106244 +- 0.000880 seconds time elapsed  ( +-  0.83% )
+           0.10298 +- 0.00398 seconds time elapsed  ( +-  3.86% )
 
 
  Performance counter stats for './mandelbrot_seq -0.8 -0.7 0.05 0.15 512' (10 runs):
 
-            400.83 msec task-clock                       #    0.998 CPUs utilized               ( +-  0.31% )
-                 2      context-switches                 #    4.990 /sec                        ( +- 25.00% )
-                 0      cpu-migrations                   #    0.000 /sec                      
-             2,623      page-faults                      #    6.544 K/sec                       ( +-  0.01% )
-     <not counted>      cpu_atom/cycles/                                                        (0.00%)
-       868,621,445      cpu_core/cycles/                 #    2.167 GHz                         ( +-  0.05% )
-     <not counted>      cpu_atom/instructions/                                                  (0.00%)
-     1,285,774,701      cpu_core/instructions/                                                  ( +-  0.01% )
-     <not counted>      cpu_atom/branches/                                                      (0.00%)
-       110,347,577      cpu_core/branches/               #  275.295 M/sec                       ( +-  0.01% )
-     <not counted>      cpu_atom/branch-misses/                                                 (0.00%)
-           252,810      cpu_core/branch-misses/                                                 ( +-  0.23% )
-             TopdownL1 (cpu_core)                 #     73.7 %  tma_backend_bound      
+            383.98 msec task-clock                       #    0.998 CPUs utilized               ( +-  0.15% )
+                 2      context-switches                 #    5.209 /sec                        ( +- 28.92% )
+                 1      cpu-migrations                   #    2.604 /sec                        ( +- 29.06% )
+                59      page-faults                      #  153.653 /sec                      
+       625,512,925      cpu_atom/cycles/                 #    1.629 GHz                         ( +- 16.79% )  (0.04%)
+       838,326,877      cpu_core/cycles/                 #    2.183 GHz                         ( +-  0.18% )  (99.44%)
+       573,464,271      cpu_atom/instructions/           #    0.92  insn per cycle              ( +- 16.99% )  (0.30%)
+     1,159,363,301      cpu_core/instructions/           #    1.85  insn per cycle              ( +-  0.19% )  (99.44%)
+        52,993,905      cpu_atom/branches/               #  138.011 M/sec                       ( +- 17.19% )  (0.55%)
+        87,036,362      cpu_core/branches/               #  226.668 M/sec                       ( +-  0.18% )  (99.44%)
+           864,264      cpu_atom/branch-misses/          #    1.63% of all branches             ( +- 31.16% )  (0.56%)
+           262,090      cpu_core/branch-misses/          #    0.49% of all branches             ( +-  0.48% )  (99.44%)
+             TopdownL1 (cpu_core)                 #     75.8 %  tma_backend_bound      
                                                   #      0.4 %  tma_bad_speculation    
-                                                  #      1.2 %  tma_frontend_bound     
-                                                  #     24.7 %  tma_retiring             ( +-  0.03% )
+                                                  #      0.7 %  tma_frontend_bound     
+                                                  #     23.2 %  tma_retiring             ( +-  0.18% )  (99.44%)
+             TopdownL1 (cpu_atom)                 #     -3.1 %  tma_bad_speculation    
+                                                  #     19.3 %  tma_retiring             ( +- 16.83% )  (0.56%)
+                                                  #     75.2 %  tma_backend_bound      
+                                                  #     75.2 %  tma_backend_bound_aux  
+                                                  #      8.6 %  tma_frontend_bound       ( +- 16.78% )  (0.56%)
 
-           0.40155 +- 0.00123 seconds time elapsed  ( +-  0.31% )
+          0.384837 +- 0.000646 seconds time elapsed  ( +-  0.17% )
 
 
  Performance counter stats for './mandelbrot_seq -0.8 -0.7 0.05 0.15 1024' (10 runs):
 
-          1,598.35 msec task-clock                       #    0.999 CPUs utilized               ( +-  0.16% )
-                 9      context-switches                 #    5.631 /sec                        ( +- 13.78% )
-                 3      cpu-migrations                   #    1.877 /sec                        ( +- 26.29% )
-            10,303      page-faults                      #    6.446 K/sec                       ( +-  0.00% )
-     <not counted>      cpu_atom/cycles/                                                        ( +- 27.90% )  (0.00%)
-     3,476,323,827      cpu_core/cycles/                 #    2.175 GHz                         ( +-  0.06% )
-     <not counted>      cpu_atom/instructions/                                                  ( +- 30.12% )  (0.00%)
-     5,137,476,176      cpu_core/instructions/           #    3.05  insn per cycle              ( +-  0.04% )
-     <not counted>      cpu_atom/branches/                                                      ( +- 33.92% )  (0.00%)
-       438,963,398      cpu_core/branches/               #  274.635 M/sec                       ( +-  0.16% )
-     <not counted>      cpu_atom/branch-misses/                                                 ( +- 32.40% )  (0.00%)
-           966,812      cpu_core/branch-misses/          #    0.18% of all branches             ( +-  0.16% )
-             TopdownL1 (cpu_core)                 #     73.7 %  tma_backend_bound      
-                                                  #      0.5 %  tma_bad_speculation    
-                                                  #      1.2 %  tma_frontend_bound     
-                                                  #     24.6 %  tma_retiring             ( +-  0.07% )
+          1,524.96 msec task-clock                       #    0.999 CPUs utilized               ( +-  0.12% )
+                 8      context-switches                 #    5.246 /sec                        ( +- 27.48% )
+                 4      cpu-migrations                   #    2.623 /sec                        ( +- 21.02% )
+                59      page-faults                      #   38.690 /sec                        ( +-  0.37% )
+     2,881,379,401      cpu_atom/cycles/                 #    1.889 GHz                         ( +- 11.14% )  (1.09%)
+     3,344,324,962      cpu_core/cycles/                 #    2.193 GHz                         ( +-  0.11% )  (98.52%)
+     2,649,577,895      cpu_atom/instructions/           #    0.92  insn per cycle              ( +- 11.78% )  (1.29%)
+     4,626,483,010      cpu_core/instructions/           #    1.61  insn per cycle              ( +-  0.10% )  (98.52%)
+       233,910,920      cpu_atom/branches/               #  153.389 M/sec                       ( +- 12.75% )  (1.29%)
+       347,134,230      cpu_core/branches/               #  227.636 M/sec                       ( +-  0.10% )  (98.52%)
+         3,178,033      cpu_atom/branch-misses/          #    1.36% of all branches             ( +- 53.98% )  (1.29%)
+         1,031,921      cpu_core/branch-misses/          #    0.44% of all branches             ( +-  0.17% )  (98.52%)
+             TopdownL1 (cpu_core)                 #     75.9 %  tma_backend_bound      
+                                                  #      0.4 %  tma_bad_speculation    
+                                                  #      0.6 %  tma_frontend_bound     
+                                                  #     23.1 %  tma_retiring             ( +-  0.10% )  (98.52%)
+             TopdownL1 (cpu_atom)                 #      2.4 %  tma_bad_speculation    
+                                                  #     19.3 %  tma_retiring             ( +- 11.23% )  (1.29%)
+                                                  #     71.1 %  tma_backend_bound      
+                                                  #     71.1 %  tma_backend_bound_aux  
+                                                  #      7.2 %  tma_frontend_bound       ( +- 11.15% )  (1.29%)
 
-           1.60021 +- 0.00300 seconds time elapsed  ( +-  0.19% )
+           1.52614 +- 0.00204 seconds time elapsed  ( +-  0.13% )
 
 
  Performance counter stats for './mandelbrot_seq -0.8 -0.7 0.05 0.15 2048' (10 runs):
 
-          6,366.63 msec task-clock                       #    0.998 CPUs utilized               ( +-  0.08% )
-                33      context-switches                 #    5.183 /sec                        ( +-  6.08% )
-                 9      cpu-migrations                   #    1.414 /sec                        ( +- 28.20% )
-            41,023      page-faults                      #    6.443 K/sec                       ( +-  0.00% )
-     8,547,962,154      cpu_atom/cycles/                 #    1.343 GHz                         ( +- 18.80% )  (0.21%)
-    13,863,391,061      cpu_core/cycles/                 #    2.178 GHz                         ( +-  0.02% )  (99.69%)
-    17,437,372,987      cpu_atom/instructions/           #    2.04  insn per cycle              ( +- 22.48% )  (0.26%)
-    20,542,971,146      cpu_core/instructions/           #    2.40  insn per cycle              ( +-  0.01% )  (99.69%)
-     3,603,266,049      cpu_atom/branches/               #  565.961 M/sec                       ( +- 22.53% )  (0.26%)
-     1,757,230,467      cpu_core/branches/               #  276.006 M/sec                       ( +-  0.10% )  (99.69%)
-         8,148,411      cpu_atom/branch-misses/          #    0.23% of all branches             ( +- 30.82% )  (0.27%)
-         3,728,415      cpu_core/branch-misses/          #    0.10% of all branches             ( +-  0.10% )  (99.69%)
-             TopdownL1 (cpu_core)                 #     72.9 %  tma_backend_bound      
-                                                  #      0.7 %  tma_bad_speculation    
-                                                  #      1.4 %  tma_frontend_bound     
-                                                  #     25.0 %  tma_retiring             ( +-  0.02% )  (99.69%)
-             TopdownL1 (cpu_atom)                 #      8.3 %  tma_bad_speculation    
-                                                  #     46.4 %  tma_retiring             ( +- 21.91% )  (0.27%)
-                                                  #     31.8 %  tma_backend_bound      
-                                                  #     31.8 %  tma_backend_bound_aux  
-                                                  #     13.5 %  tma_frontend_bound       ( +- 18.73% )  (0.28%)
+          6,075.05 msec task-clock                       #    1.000 CPUs utilized               ( +-  0.03% )
+                28      context-switches                 #    4.609 /sec                        ( +-  6.32% )
+                11      cpu-migrations                   #    1.811 /sec                        ( +- 28.61% )
+                59      page-faults                      #    9.712 /sec                        ( +-  0.51% )
+    11,426,699,346      cpu_atom/cycles/                 #    1.881 GHz                         ( +- 11.15% )  (0.30%)
+    13,326,575,342      cpu_core/cycles/                 #    2.194 GHz                         ( +-  0.02% )  (99.58%)
+    10,346,268,865      cpu_atom/instructions/           #    0.91  insn per cycle              ( +- 11.75% )  (0.37%)
+    18,442,387,253      cpu_core/instructions/           #    1.61  insn per cycle              ( +-  0.02% )  (99.58%)
+       954,669,546      cpu_atom/branches/               #  157.146 M/sec                       ( +- 11.64% )  (0.37%)
+     1,383,612,356      cpu_core/branches/               #  227.753 M/sec                       ( +-  0.02% )  (99.58%)
+        15,516,530      cpu_atom/branch-misses/          #    1.63% of all branches             ( +- 31.26% )  (0.37%)
+         4,057,998      cpu_core/branch-misses/          #    0.43% of all branches             ( +-  0.21% )  (99.58%)
+             TopdownL1 (cpu_core)                 #     76.0 %  tma_backend_bound      
+                                                  #      0.4 %  tma_bad_speculation    
+                                                  #      0.5 %  tma_frontend_bound     
+                                                  #     23.1 %  tma_retiring             ( +-  0.02% )  (99.58%)
+             TopdownL1 (cpu_atom)                 #      1.2 %  tma_bad_speculation    
+                                                  #     19.1 %  tma_retiring             ( +- 11.33% )  (0.37%)
+                                                  #     71.3 %  tma_backend_bound      
+                                                  #     71.3 %  tma_backend_bound_aux  
+                                                  #      8.3 %  tma_frontend_bound       ( +- 11.16% )  (0.37%)
 
-           6.37764 +- 0.00508 seconds time elapsed  ( +-  0.08% )
+           6.07720 +- 0.00224 seconds time elapsed  ( +-  0.04% )
 

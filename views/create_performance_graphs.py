@@ -51,6 +51,39 @@ def plot_metric_region_comparison(df, metric):
     plt.savefig(f'graphs/regions/{metric}_comparison.png')
     plt.close()
 
+# Função para criar gráficos para uma métrica específica em relação a região
+def plot_metric_io_aloc_comparison(df, metric):
+    stats = compute_statistics(df, metric, ['input_size', 'io_aloc'])
+    
+    plt.figure(figsize=(10, 6))
+    sns.lineplot(data=stats, x='input_size', y='mean', hue='io_aloc', markers=True, errorbar=None, palette='muted')
+    
+    # Adiciona os intervalos de confiança, com deslocamento e cores diferenciadas
+    colors = sns.color_palette('muted', n_colors=len(stats['io_aloc'].unique())) 
+    for idx, (version, color) in enumerate(zip(stats['io_aloc'].unique(), colors)):
+        version_data = stats[stats['io_aloc'] == version]
+        
+        for i, row in version_data.iterrows():
+            plt.errorbar(x=row['input_size'], y=row['mean'],
+                         yerr=[[row['mean'] - row['ci95_lo']], [row['ci95_hi'] - row['mean']]],
+                         fmt='none', ecolor=color, capsize=6, alpha=0.8)
+    
+    plt.title(f'Média e Intervalo de Confiança (95%) para {metric} por Tamanho de Entrada')
+    plt.xlabel('Tamanho da Entrada')
+    plt.xscale('log', base=2) 
+    plt.ylabel(metric)
+    plt.yscale('log') 
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+    plt.legend(title='I/O e Alocação de Memória', loc='best')
+    plt.grid(True, linestyle='--', linewidth=0.5)
+    
+    # Cria a pasta de gráficos se não existir
+    os.makedirs('graphs/io_aloc', exist_ok=True)
+    plt.savefig(f'graphs/io_aloc/{metric}_comparison.png')
+    plt.close()
+
+
 # Função para criar gráficos para uma métrica específica em relação ao tamanho da entrada
 def plot_metric_input_size_comparison(df, metric):
     stats = compute_statistics(df, metric, ['version', 'input_size'])
@@ -122,6 +155,7 @@ def main():
     # Carregar os dados do CSV
     df = pd.read_csv('perf_stats.csv')
     threads_df = pd.read_csv('perf_stats_threads.csv')
+    io_df = pd.read_csv('perf_stats_io_aloc.csv')
 
     # Calcular estatísticas para cada métrica e gerar os gráficos
     # Adicione as métricas conforme presente no log do perf
@@ -130,8 +164,8 @@ def main():
         plot_metric_region_comparison(df, metric)
         plot_metric_input_size_comparison(df, metric)
         plot_metric_num_threads_comparison(threads_df, metric)
-
-
+        plot_metric_io_aloc_comparison(io_df, metric)
+    
     print("Gráficos gerados com sucesso e salvos na pasta 'graphs'!")
 
 main()

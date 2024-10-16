@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <math.h>
 
+// booleano para controlar i/o e alocação de memória 
+int IO_ALOC = 0;
+
 double c_x_min;
 double c_x_max;
 double c_y_min;
@@ -41,6 +44,8 @@ int colors[17][3] = {
                     };
 
 void allocate_image_buffer(){
+    if (!IO_ALOC) return;
+    
     int rgb_size = 3;
     image_buffer = (unsigned char **) malloc(sizeof(unsigned char *) * image_buffer_size);
 
@@ -72,10 +77,16 @@ void init(int argc, char *argv[]){
 
         pixel_width       = (c_x_max - c_x_min) / i_x_max;
         pixel_height      = (c_y_max - c_y_min) / i_y_max;
+
+
+        if(argc >= 7) sscanf(argv[6], "%d", &IO_ALOC);
+            
     };
 };
 
 void update_rgb_buffer(int iteration, int x, int y){
+    if (!IO_ALOC) return;
+
     int color;
 
     if(iteration == iteration_max){
@@ -93,6 +104,8 @@ void update_rgb_buffer(int iteration, int x, int y){
 };
 
 void write_to_file(){
+    if (!IO_ALOC) return;
+    
     FILE * file;
     char * filename               = "output.ppm";
     char * comment                = "# ";
