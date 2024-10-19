@@ -44,8 +44,6 @@ int colors[17][3] = {
                     };
 
 void allocate_image_buffer(){
-    if (!IO_ALOC) return;
-    
     int rgb_size = 3;
     image_buffer = (unsigned char **) malloc(sizeof(unsigned char *) * image_buffer_size);
 
@@ -85,8 +83,6 @@ void init(int argc, char *argv[]){
 };
 
 void update_rgb_buffer(int iteration, int x, int y){
-    if (!IO_ALOC) return;
-
     int color;
 
     if(iteration == iteration_max){
@@ -103,9 +99,7 @@ void update_rgb_buffer(int iteration, int x, int y){
     };
 };
 
-void write_to_file(){
-    if (!IO_ALOC) return;
-    
+void write_to_file(){   
     FILE * file;
     char * filename               = "output.ppm";
     char * comment                = "# ";
@@ -165,7 +159,7 @@ void compute_mandelbrot(){
                 z_y_squared = z_y * z_y;
             };
 
-            update_rgb_buffer(iteration, i_x, i_y);
+            if (IO_ALOC) update_rgb_buffer(iteration, i_x, i_y);
         };
     };
 };
@@ -173,11 +167,11 @@ void compute_mandelbrot(){
 int main(int argc, char *argv[]){
     init(argc, argv);
 
-    allocate_image_buffer();
+    if (IO_ALOC) allocate_image_buffer();
 
     compute_mandelbrot();
 
-    write_to_file();
+    if (IO_ALOC) write_to_file();
 
     return 0;
 };
