@@ -4,8 +4,8 @@
 - [x]  Paralelizar o código com OpenMP
 - [x]  Revisar os códigos e merge
 - [x]  Realizar a simulação dos testes e coletar os dados
-- [ ]  Escrever o relatório
-- [ ]  Entregar
+- [x]  Escrever o relatório
+- [x]  Entregar
 
 
 ## Visualizando os resultados
