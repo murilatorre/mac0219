@@ -138,7 +138,7 @@ void compute_mandelbrot_aux(int i_x, int i_y, double c_y) {
         z_y_squared = z_y * z_y;
     };
 
-    // update_rgb_buffer(iteration, i_x, i_y);
+    update_rgb_buffer(iteration, i_x, i_y);
 
 }
 
@@ -155,12 +155,12 @@ void compute_mandelbrot_openmp(int i_y){
 int main(int argc, char *argv[]){
     init(argc, argv);
 
-    // allocate_image_buffer();
+    allocate_image_buffer();
     
     #pragma omp parallel for
     for(int i_y = 0; i_y < i_y_max; i_y++) {compute_mandelbrot_openmp(i_y);}
 
-    // write_to_file();
+    write_to_file();
 
     return 0;
 };
