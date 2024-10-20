@@ -34,4 +34,5 @@ NOTA: Só é necessário preparar o ambiente virutal uma vez, após a primeira v
 * O número threads varia entre $$2^{0}$$ e $$2^{5}$$
 * As simulações que variam o tamanho da entrada usam o número de threads default 16;
 * As simulações que variam o número de threads usam o tamanho de entrada default 512;
+* Por default, todos os códigos são simulados sem alocação de memória e operações I/O;
 * Em alguns casos de comparações por região (gráfico de barras), não há média/intervalo de confiança. Isso ocorre porque o desvio padrão da amostra é 0.
