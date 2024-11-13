@@ -62,7 +62,7 @@ double calculate_elapsed_time(struct timespec start, struct timespec end)
     return (end_sec - start_sec) / 1e9;
 }
 
-void save_to_file(double **h, int n)
+void save_to_file(double *h, int n)
 {
     FILE *file = fopen("room.txt", "w");
     for (int i = 0; i < n; i++) {
