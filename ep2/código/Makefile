@@ -7,8 +7,8 @@ all: $(TARGET)
 $(TARGET): heat.o
 	$(CC) $(CFLAGS) -o $(TARGET) heat.o
 
-heat.o: heat.c
-	$(CC) $(CFLAGS) -c heat.c
+heat.o: heat.cu
+	$(CC) $(CFLAGS) -c heat.cu
 
 clean:
 	rm -f $(TARGET) heat.o
