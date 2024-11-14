@@ -56,6 +56,13 @@ void initialize(double *h, int n)
     }
 }
 
+bool equal_result(double *res_cpu, double *res_gpu, int n) {
+     for (int i = 0; i < n*n; i++) {
+            if (res_cpu[i] != res_gpu[i]) return false;
+    }
+    return true;
+}
+
 double calculate_elapsed_time(struct timespec start, struct timespec end)
 {
     double start_sec = (double)start.tv_sec * 1e9 + (double)start.tv_nsec;
