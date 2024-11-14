@@ -90,6 +90,9 @@ int main(int argc, char *argv[])
 
     struct timespec start_host, end_host;
     struct timespec start_device, end_device;
+    struct timespec start_mov_hd, end_mov_hd;
+    struct timespec start_mov_dh, end_mov_dh;
+    
     double *h, *g;
     double *cpu_h, *cpu_g;
     double *d_h, *d_g; 
@@ -114,7 +117,9 @@ int main(int argc, char *argv[])
     cudaMalloc((void**)&d_g, n*n * sizeof(double));
 
     // Transfer data from host to device memory
+    clock_gettime(CLOCK_MONOTONIC, &start_mov_hd);
     cudaMemcpy(d_h, h, n*n * sizeof(double), cudaMemcpyHostToDevice);
+    clock_gettime(CLOCK_MONOTONIC, &end_mov_hd);
 
     // Executing kernel 
     int block_size = 256;
@@ -125,19 +130,26 @@ int main(int argc, char *argv[])
     clock_gettime(CLOCK_MONOTONIC, &end_device);
     
     // Transfer data back to host memory
+    clock_gettime(CLOCK_MONOTONIC, &start_mov_dh);
     cudaMemcpy(h, d_h, n*n * sizeof(double), cudaMemcpyDeviceToHost);
+    clock_gettime(CLOCK_MONOTONIC, &end_mov_dh);
     save_to_file(h, n);
 
-    clock_gettime(CLOCK_MONOTONIC, &start);
-    jacobi_iteration(cpu_h, cpu_g, n, iter_limit);
-    clock_gettime(CLOCK_MONOTONIC, &end);
-    save_to_file(cpu_h, n);
-
+    clock_gettime(CLOCK_MONOTONIC, &start_host);
+    c_jacobi_iteration(cpu_h, cpu_g, n, iter_limit);
+    clock_gettime(CLOCK_MONOTONIC, &end_host);
 
     // Verification
+    if (equal_result(cpu_h, h, n))
+        printf("CORRETO\n");
+    else printf("ERRADO\n");
 
-    // printf("Tempo de execução CPU: %.9f segundos\n", calculate_elapsed_time(start_host, end_host));
-    printf("Tempo de execução GPU: %.9f segundos\n", calculate_elapsed_time(start_device, nd_device));
+    // Print results
+    printf("Tempo de execução CPU: %.9f segundos\n", calculate_elapsed_time(start_host, end_host));
+    printf("Tempo de execução GPU: %.9f segundos\n", calculate_elapsed_time(start_device, end_device));
+    printf("Tempo de movimentação de dados entre device e host: %.9f segundos\n", calculate_elapsed_time(start_mov_dh, end_mov_dh));
+    printf("Tempo de movimentação de dados entre host e device: %.9f segundos\n", calculate_elapsed_time(start_mov_hd, end_mov_hd));
+
 
     // Deallocate device memory
     cudaFree(d_h);
