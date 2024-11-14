@@ -84,6 +84,7 @@ int main(int argc, char *argv[])
     struct timespec start_host, end_host;
     struct timespec start_device, end_device;
     double *h, *g;
+    double *cpu_h, *cpu_g;
     double *d_h, *d_g; 
 
     int n = atoi(argv[1]);
@@ -91,12 +92,15 @@ int main(int argc, char *argv[])
 
     h = (double *)malloc(n*n * sizeof(double));
     g = (double *)malloc(n*n * sizeof(double));
-    if (h == NULL || g == NULL) {
+    cpu_h = (double *)malloc(n*n * sizeof(double));
+    cpu_g = (double *)malloc(n*n * sizeof(double));
+    if (h == NULL || g == NULL || cpu_h == NULL || cpu_g == NULL) {
         fprintf(stderr, "Erro ao alocar memória para h ou g\n");
         exit(EXIT_FAILURE);
     }
 
     initialize(h, n);
+    initialize(cpu_h, n);
 
     // Allocate device memory 
     cudaMalloc((void**)&d_h, n*n * sizeof(double));
@@ -116,6 +120,12 @@ int main(int argc, char *argv[])
     // Transfer data back to host memory
     cudaMemcpy(h, d_h, n*n * sizeof(double), cudaMemcpyDeviceToHost);
     save_to_file(h, n);
+
+    clock_gettime(CLOCK_MONOTONIC, &start);
+    jacobi_iteration(cpu_h, cpu_g, n, iter_limit);
+    clock_gettime(CLOCK_MONOTONIC, &end);
+    save_to_file(cpu_h, n);
+
 
     // Verification
 
