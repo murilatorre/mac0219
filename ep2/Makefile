@@ -1,14 +1,24 @@
-TARGET = heat
 CC = gcc
+NVCC = nvcc
+CUDAPATH = /usr/local/cuda
+
 CFLAGS = -Wall -Wextra -O2
+NVCCFLAGS = -I$(CUDAPATH)/include 
 
-all: $(TARGET)
+TARGET = heat
+CU_EXECUTABLES = $(TARGET)_parallel $(TARGET)_body
+C_EXECUTABLE = $(TARGET)
 
-$(TARGET): heat.o
-	$(CC) $(CFLAGS) -o $(TARGET) heat.o
+all: $(C_EXECUTABLE) $(CU_EXECUTABLES)
 
-heat.o: heat.cu
-	$(CC) $(CFLAGS) -c heat.cu
+$(C_EXECUTABLE): $(TARGET).o
+	$(CC) $(CFLAGS) -o $@ $^
+
+$(TARGET).o: $(TARGET).c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+%: %.cu
+	$(NVCC) $(NVCCFLAGS) $< -o $@
 
 clean:
-	rm -f $(TARGET) heat.o
+	rm -f $(TARGET).o $(C_EXECUTABLE) $(CU_EXECUTABLES)
