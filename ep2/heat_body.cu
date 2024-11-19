@@ -1,15 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <time.h>
+#include <time.h> 
 #include <cuda.h>
 #include <cuda_runtime.h>
 
 #define WALL_TEMP 20.0
-#define FIREPLACE_TEMP 100.0
+#define BODY_TEMP 37.0
 
-#define FIREPLACE_START 3
-#define FIREPLACE_END 7
+#define BODY_X 5
+#define BODY_Y 5
 #define ROOM_SIZE 10
 
 
@@ -17,30 +17,25 @@ __global__ void jacobi_iteration(double *h, double *g, int n, int iter_limit)
 {
     int i = blockIdx.y * blockDim.y + threadIdx.y;  // ROW
     int j = blockIdx.x * blockDim.x + threadIdx.x;  // COLUMN
-    if (i > 0 && i < n - 1 && j > 0 && j < n - 1) {
-        g[i * n + j] = 0.25 * (h[(i - 1) * n + j] + h[(i + 1) * n + j] +
-                                   h[i * n + (j - 1)] + h[i * n + (j + 1)]);
-    }
-    
-}
-
-__global__ void jacobi_copy(double *h, double *g, int n, int iter_limit)
-{
-    int i = blockIdx.y * blockDim.y + threadIdx.y;  // ROW
-    int j = blockIdx.x * blockDim.x + threadIdx.x;  // COLUMN
 
     if (i > 0 && i < n - 1 && j > 0 && j < n - 1) {
-        h[i * n + j] = g[i * n + j];
-    }
+        g[i * n + j] = (i == (BODY_X * n) / ROOM_SIZE && j == (BODY_Y * n) / ROOM_SIZE) ? 
+                         h[i*n +j] : 0.25 * (h[(i - 1) * n + j] + h[(i + 1) * n + j] + h[i * n + (j - 1)] + h[i * n + (j + 1)]);
+    } 
+   
 }
 
 
 void c_jacobi_iteration(double *h, double *g, int n, int iter_limit)
 {
+    int body_x = (BODY_X * n) / ROOM_SIZE;
+    int body_y = (BODY_Y * n) / ROOM_SIZE;
+
     for (int iter = 0; iter < iter_limit; iter++) {
         for (int i = 1; i < n - 1; i++)
             for (int j = 1; j < n - 1; j++)
-                g[i*n + j] = 0.25 * (h[(i-1)*n + j] + h[(i+1)*n + j] + h[i*n + (j-1)] + h[i*n + (j+1)]);
+                g[i * n + j] = (i == body_x && j == body_y) ? 
+                         h[i*n +j] : 0.25 * (h[(i - 1) * n + j] + h[(i + 1) * n + j] + h[i * n + (j - 1)] + h[i * n + (j + 1)]);
             
     
         for (int i = 1; i < n - 1; i++)
@@ -51,13 +46,15 @@ void c_jacobi_iteration(double *h, double *g, int n, int iter_limit)
 
 void initialize(double *h, int n)
 {
-    int fireplace_start = (FIREPLACE_START * n) / ROOM_SIZE;
-    int fireplace_end = (FIREPLACE_END * n) / ROOM_SIZE;
+    int body_x = (BODY_X * n) / ROOM_SIZE;
+    int body_y = (BODY_Y * n) / ROOM_SIZE;
 
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
             if (i == 0 || i == n - 1 || j == 0 || j == n - 1)
-                h[i*n + j] = (i == n - 1 && j >= fireplace_start && j <= fireplace_end) ? FIREPLACE_TEMP : WALL_TEMP;
+                h[i*n + j] = WALL_TEMP;
+            else if (i == body_x && j == body_y) 
+                h[i*n + j] = BODY_TEMP;
             else
                 h[i*n + j] = 0.0;
         }
@@ -179,4 +176,3 @@ int main(int argc, char *argv[])
 
     return 0;
 }
-
