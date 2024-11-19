@@ -15,8 +15,8 @@
 
 __global__ void jacobi_iteration(double *h, double *g, int n, int iter_limit)
 {
-    int i = blockIdx.y * blockDim.y + threadIdx.y;  // ROW
-    int j = blockIdx.x * blockDim.x + threadIdx.x;  // COLUMN
+    int i = blockIdx.y * blockDim.y + threadIdx.y;  // row
+    int j = blockIdx.x * blockDim.x + threadIdx.x;  // column
 
     if (i > 0 && i < n - 1 && j > 0 && j < n - 1) {
         g[i * n + j] = (i == (BODY_X * n) / ROOM_SIZE && j == (BODY_Y * n) / ROOM_SIZE) ? 
@@ -26,7 +26,7 @@ __global__ void jacobi_iteration(double *h, double *g, int n, int iter_limit)
 }
 
 
-void c_jacobi_iteration(double *h, double *g, int n, int iter_limit)
+void jacobi_iteration_sequential(double *h, double *g, int n, int iter_limit)
 {
     int body_x = (BODY_X * n) / ROOM_SIZE;
     int body_y = (BODY_Y * n) / ROOM_SIZE;
@@ -34,9 +34,8 @@ void c_jacobi_iteration(double *h, double *g, int n, int iter_limit)
     for (int iter = 0; iter < iter_limit; iter++) {
         for (int i = 1; i < n - 1; i++)
             for (int j = 1; j < n - 1; j++)
-                g[i * n + j] = (i == body_x && j == body_y) ? 
-                         h[i*n +j] : 0.25 * (h[(i - 1) * n + j] + h[(i + 1) * n + j] + h[i * n + (j - 1)] + h[i * n + (j + 1)]);
-            
+                g[i * n + j] = (i == body_x && j == body_y) ?  h[i*n +j] : 
+                               0.25 * (h[(i - 1) * n + j] + h[(i + 1) * n + j] + h[i * n + (j - 1)] + h[i * n + (j + 1)]);     
     
         for (int i = 1; i < n - 1; i++)
             for (int j = 1; j < n - 1; j++)
@@ -44,29 +43,26 @@ void c_jacobi_iteration(double *h, double *g, int n, int iter_limit)
     }
 }
 
+
 void initialize(double *h, int n)
 {
     int body_x = (BODY_X * n) / ROOM_SIZE;
     int body_y = (BODY_Y * n) / ROOM_SIZE;
 
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            if (i == 0 || i == n - 1 || j == 0 || j == n - 1)
-                h[i*n + j] = WALL_TEMP;
-            else if (i == body_x && j == body_y) 
-                h[i*n + j] = BODY_TEMP;
-            else
-                h[i*n + j] = 0.0;
-        }
-    }
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < n; j++) 
+            if (i == 0 || i == n - 1 || j == 0 || j == n - 1)  h[i*n + j] = WALL_TEMP;
+            else if (i == body_x && j == body_y)               h[i*n + j] = BODY_TEMP;
+            else                                               h[i*n + j] = 0.0;
 }
 
-bool equal_result(double *res_cpu, double *res_gpu, int n) {
-     for (int i = 0; i < n*n; i++) {
-            if (res_cpu[i] != res_gpu[i]) return false;
-    }
+
+bool assert_values(double *cpu_ans, double *gpu_ans, int n) {
+     for (int i = 0; i < n*n; i++) 
+        if (cpu_ans[i] != gpu_ans[i]) return false;
     return true;
 }
+
 
 double calculate_elapsed_time(struct timespec start, struct timespec end)
 {
@@ -74,6 +70,7 @@ double calculate_elapsed_time(struct timespec start, struct timespec end)
     double end_sec = (double)end.tv_sec * 1e9 + (double)end.tv_nsec;
     return (end_sec - start_sec) / 1e9;
 }
+
 
 void save_to_file(double *h, int n)
 {
@@ -85,6 +82,7 @@ void save_to_file(double *h, int n)
     }
     fclose(file);
 }
+
 
 int main(int argc, char *argv[])
 {
@@ -99,9 +97,8 @@ int main(int argc, char *argv[])
     struct timespec start_mov_dh, end_mov_dh;
     
     double *h, *g;
-    double *cpu_h, *cpu_g;
     double *d_h, *d_g; 
-
+    
     int n = atoi(argv[1]);
     int iter_limit = atoi(argv[2]);
     int t = atoi(argv[3]);
@@ -110,22 +107,23 @@ int main(int argc, char *argv[])
     dim3 block_dim(t, t);
     dim3 grid_dim(b, b);
 
-    h = (double *)malloc(n*n * sizeof(double));
-    g = (double *)malloc(n*n * sizeof(double));
-    cpu_h = (double *)malloc(n*n * sizeof(double));
-    cpu_g = (double *)malloc(n*n * sizeof(double));
-    if (h == NULL || g == NULL || cpu_h == NULL || cpu_g == NULL) {
+    // Allocate host memory
+    h = (double *)malloc(n*n * sizeof(double)); 
+    g = (double *)malloc(n*n * sizeof(double)); 
+    
+    if (h == NULL || g == NULL) {
         fprintf(stderr, "Erro ao alocar memória para h ou g\n");
         exit(EXIT_FAILURE);
     }
 
     // Initialize host arrays
     initialize(h, n);
-    initialize(cpu_h, n);
+
 
     // Allocate device memory 
     cudaMalloc((void**)&d_h, n*n * sizeof(double));
     cudaMalloc((void**)&d_g, n*n * sizeof(double));
+
 
     // Transfer data from host to device memory
     clock_gettime(CLOCK_MONOTONIC, &start_mov_hd);
@@ -133,31 +131,47 @@ int main(int argc, char *argv[])
     cudaMemcpy(d_g, h, n*n * sizeof(double), cudaMemcpyHostToDevice);
     clock_gettime(CLOCK_MONOTONIC, &end_mov_hd);
 
+
     // Executing kernel 
     clock_gettime(CLOCK_MONOTONIC, &start_device);
     for (int iter = 0; iter < iter_limit; iter++) {
         jacobi_iteration<<<grid_dim, block_dim>>>(d_h, d_g, n, iter_limit);
         cudaDeviceSynchronize();
         double *temp = d_h;
-        d_h = d_g;
-        d_g = temp;
+        d_h = d_g; d_g = temp;
     }
     clock_gettime(CLOCK_MONOTONIC, &end_device);
-    
+
+
     // Transfer data back to host memory
     clock_gettime(CLOCK_MONOTONIC, &start_mov_dh);
     cudaMemcpy(h, d_h, n*n * sizeof(double), cudaMemcpyDeviceToHost);
     clock_gettime(CLOCK_MONOTONIC, &end_mov_dh);
     save_to_file(h, n);
 
-    clock_gettime(CLOCK_MONOTONIC, &start_host);
-    c_jacobi_iteration(cpu_h, cpu_g, n, iter_limit);
-    clock_gettime(CLOCK_MONOTONIC, &end_host);
 
     // Verification
-    if (equal_result(cpu_h, h, n))
-        printf("CORRETO\n");
-    else printf("ERRADO\n");
+    // allocate and initialize arrays
+    double *cpu_h, *cpu_g;
+    cpu_h = (double *)malloc(n*n * sizeof(double));
+    cpu_g = (double *)malloc(n*n * sizeof(double));
+    initialize(cpu_h, n);
+
+    // calculate jacobi iteration
+    clock_gettime(CLOCK_MONOTONIC, &start_host);
+    jacobi_iteration_sequential(cpu_h, cpu_g, n, iter_limit);
+    clock_gettime(CLOCK_MONOTONIC, &end_host);
+    
+    if (assert_values(cpu_h, h, n)) {
+        printf("O resultado da GPU está correto!\n");
+    } else {
+        printf("O resultado da GPU está errado :(\n");
+        exit(EXIT_FAILURE);
+    }
+
+    // deallocate
+    free(cpu_h); 
+    free(cpu_g); 
 
     // Print results
     printf("Tempo de execução CPU: %.9f segundos\n", calculate_elapsed_time(start_host, end_host));
@@ -169,6 +183,7 @@ int main(int argc, char *argv[])
     // Deallocate device memory
     cudaFree(d_h);
     cudaFree(d_g);
+
 
     // Deallocate host memory
     free(h); 
