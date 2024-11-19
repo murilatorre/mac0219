@@ -15,15 +15,14 @@ void initialize(double **h, int n)
     int fireplace_start = (FIREPLACE_START * n) / ROOM_SIZE;
     int fireplace_end = (FIREPLACE_END * n) / ROOM_SIZE;
 
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
+    for (int i = 0; i < n; i++) 
+        for (int j = 0; j < n; j++)
             if (i == 0 || i == n - 1 || j == 0 || j == n - 1)
                 h[i][j] = (i == n - 1 && j >= fireplace_start && j <= fireplace_end) ? FIREPLACE_TEMP : WALL_TEMP;
             else
                 h[i][j] = 0.0;
-        }
-    }
 }
+
 
 void jacobi_iteration(double **h, double **g, int n, int iter_limit)
 {
@@ -39,12 +38,14 @@ void jacobi_iteration(double **h, double **g, int n, int iter_limit)
     }
 }
 
+
 double calculate_elapsed_time(struct timespec start, struct timespec end)
 {
     double start_sec = (double)start.tv_sec * 1e9 + (double)start.tv_nsec;
     double end_sec = (double)end.tv_sec * 1e9 + (double)end.tv_nsec;
     return (end_sec - start_sec) / 1e9;
 }
+
 
 void save_to_file(double **h, int n)
 {
@@ -56,6 +57,7 @@ void save_to_file(double **h, int n)
     }
     fclose(file);
 }
+
 
 int main(int argc, char *argv[])
 {
@@ -94,11 +96,11 @@ int main(int argc, char *argv[])
     double elapsed_time = calculate_elapsed_time(start, end);
     printf("Tempo de execução: %.9f segundos\n", elapsed_time);
 
-    for (int i = 0; i < n; i++)
-    {
+    for (int i = 0; i < n; i++) {
         free(h[i]);
         free(g[i]);
     }
+
     free(h);
     free(g);
 
