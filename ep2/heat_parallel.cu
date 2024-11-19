@@ -21,7 +21,16 @@ __global__ void jacobi_iteration(double *h, double *g, int n, int iter_limit)
         g[i * n + j] = 0.25 * (h[(i - 1) * n + j] + h[(i + 1) * n + j] +
                                    h[i * n + (j - 1)] + h[i * n + (j + 1)]);
     }
-    
+}
+
+__global__ void jacobi_copy(double *h, double *g, int n, int iter_limit)
+{
+    int i = blockIdx.y * blockDim.y + threadIdx.y;  // ROW
+    int j = blockIdx.x * blockDim.x + threadIdx.x;  // COLUMN
+
+    if (i > 0 && i < n - 1 && j > 0 && j < n - 1) {
+        h[i * n + j] = g[i * n + j];
+    }
 }
 
 
@@ -57,6 +66,7 @@ void initialize(double *h, int n)
 bool equal_result(double *res_cpu, double *res_gpu, int n) {
      for (int i = 0; i < n*n; i++) {
             if (res_cpu[i] != res_gpu[i]) return false;
+            if (res_cpu[i] != res_gpu[i]) return false;
     }
     return true;
 }
@@ -83,7 +93,6 @@ int main(int argc, char *argv[])
 {
     if (argc < 4) {
         fprintf(stderr, "Uso: %s <número de pontos> <limite de iterações> <número de threads por bloco>\n", argv[0]);
-        return 1;
     }
 
     struct timespec start_host, end_host;
@@ -124,6 +133,7 @@ int main(int argc, char *argv[])
     clock_gettime(CLOCK_MONOTONIC, &start_mov_hd);
     cudaMemcpy(d_h, h, n*n * sizeof(double), cudaMemcpyHostToDevice);
     cudaMemcpy(d_g, h, n*n * sizeof(double), cudaMemcpyHostToDevice);
+    cudaMemcpy(d_g, h, n*n * sizeof(double), cudaMemcpyHostToDevice);
     clock_gettime(CLOCK_MONOTONIC, &end_mov_hd);
 
     // Executing kernel 
@@ -131,6 +141,9 @@ int main(int argc, char *argv[])
     for (int iter = 0; iter < iter_limit; iter++) {
         jacobi_iteration<<<grid_dim, block_dim>>>(d_h, d_g, n, iter_limit);
         cudaDeviceSynchronize();
+        double *temp = d_h;
+        d_h = d_g;
+        d_g = temp;
         double *temp = d_h;
         d_h = d_g;
         d_g = temp;
@@ -169,3 +182,4 @@ int main(int argc, char *argv[])
 
     return 0;
 }
+
