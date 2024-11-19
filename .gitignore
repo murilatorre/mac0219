@@ -1,7 +1,0 @@
-.venv
-.venv/*
-results/
-results/*
-mandelbrot_seq
-mandelbrot_pth
-mandelbrot_omp
