@@ -17,12 +17,11 @@ __global__ void jacobi_iteration(double *h, double *g, int n, int iter_limit)
 {
     int i = blockIdx.y * blockDim.y + threadIdx.y;  // ROW
     int j = blockIdx.x * blockDim.x + threadIdx.x;  // COLUMN
-    printf("i = %d\n", i);
-    printf("j = %d\n", j);
     if (i > 0 && i < n - 1 && j > 0 && j < n - 1) {
         g[i * n + j] = 0.25 * (h[(i - 1) * n + j] + h[(i + 1) * n + j] +
                                    h[i * n + (j - 1)] + h[i * n + (j + 1)]);
     }
+    
 }
 
 __global__ void jacobi_copy(double *h, double *g, int n, int iter_limit)
@@ -67,7 +66,7 @@ void initialize(double *h, int n)
 
 bool equal_result(double *res_cpu, double *res_gpu, int n) {
      for (int i = 0; i < n*n; i++) {
-            if (res_cpu[i] != res_gpu[i]) {printf("%d\n",i); return false;}
+            if (res_cpu[i] != res_gpu[i]) return false;
     }
     return true;
 }
@@ -92,8 +91,8 @@ void save_to_file(double *h, int n)
 
 int main(int argc, char *argv[])
 {
-    if (argc < 3) {
-        fprintf(stderr, "Uso: %s <número de pontos> <limite de iterações>\n", argv[0]);
+    if (argc < 4) {
+        fprintf(stderr, "Uso: %s <número de pontos> <limite de iterações> <número de threads por bloco>\n", argv[0]);
         return 1;
     }
 
@@ -108,10 +107,11 @@ int main(int argc, char *argv[])
 
     int n = atoi(argv[1]);
     int iter_limit = atoi(argv[2]);
-    int threads_per_block = 16;
-    dim3 block_dim(threads_per_block, threads_per_block);
-    dim3 grid_dim((n + threads_per_block - 1) / threads_per_block, 
-                  (n + threads_per_block - 1) / threads_per_block);
+    int t = atoi(argv[3]);
+    int b = (n + t) / t;
+
+    dim3 block_dim(t, t);
+    dim3 grid_dim(b, b);
 
     h = (double *)malloc(n*n * sizeof(double));
     g = (double *)malloc(n*n * sizeof(double));
@@ -133,17 +133,17 @@ int main(int argc, char *argv[])
     // Transfer data from host to device memory
     clock_gettime(CLOCK_MONOTONIC, &start_mov_hd);
     cudaMemcpy(d_h, h, n*n * sizeof(double), cudaMemcpyHostToDevice);
+    cudaMemcpy(d_g, h, n*n * sizeof(double), cudaMemcpyHostToDevice);
     clock_gettime(CLOCK_MONOTONIC, &end_mov_hd);
 
     // Executing kernel 
     clock_gettime(CLOCK_MONOTONIC, &start_device);
     for (int iter = 0; iter < iter_limit; iter++) {
-        printf("entrei eba\n");
         jacobi_iteration<<<grid_dim, block_dim>>>(d_h, d_g, n, iter_limit);
         cudaDeviceSynchronize();
-        double *temp = h;
-        h = g;
-        g = temp;
+        double *temp = d_h;
+        d_h = d_g;
+        d_g = temp;
     }
     clock_gettime(CLOCK_MONOTONIC, &end_device);
     
@@ -179,3 +179,4 @@ int main(int argc, char *argv[])
 
     return 0;
 }
+
