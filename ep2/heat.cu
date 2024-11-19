@@ -15,17 +15,26 @@
 
 __global__ void jacobi_iteration(double *h, double *g, int n, int iter_limit)
 {
-    for (int iter = 0; iter < iter_limit; iter++) {
-        for (int i = 1; i < n - 1; i++)
-            for (int j = 1; j < n - 1; j++)
-                g[i*n + j] = 0.25 * (h[(i-1)*n + j] + h[(i+1)*n + j] + h[i*n + (j-1)] + h[i*n + (j+1)]);
-            
-    
-        for (int i = 1; i < n - 1; i++)
-            for (int j = 1; j < n - 1; j++)
-                h[i*n + j] = g[i*n + j];
+    int i = blockIdx.y * blockDim.y + threadIdx.y;  // ROW
+    int j = blockIdx.x * blockDim.x + threadIdx.x;  // COLUMN
+    printf("i = %d\n", i);
+    printf("j = %d\n", j);
+    if (i > 0 && i < n - 1 && j > 0 && j < n - 1) {
+        g[i * n + j] = 0.25 * (h[(i - 1) * n + j] + h[(i + 1) * n + j] +
+                                   h[i * n + (j - 1)] + h[i * n + (j + 1)]);
     }
 }
+
+__global__ void jacobi_copy(double *h, double *g, int n, int iter_limit)
+{
+    int i = blockIdx.y * blockDim.y + threadIdx.y;  // ROW
+    int j = blockIdx.x * blockDim.x + threadIdx.x;  // COLUMN
+
+    if (i > 0 && i < n - 1 && j > 0 && j < n - 1) {
+        h[i * n + j] = g[i * n + j];
+    }
+}
+
 
 void c_jacobi_iteration(double *h, double *g, int n, int iter_limit)
 {
@@ -58,7 +67,7 @@ void initialize(double *h, int n)
 
 bool equal_result(double *res_cpu, double *res_gpu, int n) {
      for (int i = 0; i < n*n; i++) {
-            if (res_cpu[i] != res_gpu[i]) return false;
+            if (res_cpu[i] != res_gpu[i]) {printf("%d\n",i); return false;}
     }
     return true;
 }
@@ -99,6 +108,10 @@ int main(int argc, char *argv[])
 
     int n = atoi(argv[1]);
     int iter_limit = atoi(argv[2]);
+    int threads_per_block = 16;
+    dim3 block_dim(threads_per_block, threads_per_block);
+    dim3 grid_dim((n + threads_per_block - 1) / threads_per_block, 
+                  (n + threads_per_block - 1) / threads_per_block);
 
     h = (double *)malloc(n*n * sizeof(double));
     g = (double *)malloc(n*n * sizeof(double));
@@ -109,6 +122,7 @@ int main(int argc, char *argv[])
         exit(EXIT_FAILURE);
     }
 
+    // Initialize host arrays
     initialize(h, n);
     initialize(cpu_h, n);
 
@@ -122,11 +136,15 @@ int main(int argc, char *argv[])
     clock_gettime(CLOCK_MONOTONIC, &end_mov_hd);
 
     // Executing kernel 
-    int block_size = 256;
-    int grid_size = ((n + block_size) / block_size);
-
     clock_gettime(CLOCK_MONOTONIC, &start_device);
-    jacobi_iteration<<<1,1>>>(d_h, d_g, n, iter_limit);
+    for (int iter = 0; iter < iter_limit; iter++) {
+        printf("entrei eba\n");
+        jacobi_iteration<<<grid_dim, block_dim>>>(d_h, d_g, n, iter_limit);
+        cudaDeviceSynchronize();
+        double *temp = h;
+        h = g;
+        g = temp;
+    }
     clock_gettime(CLOCK_MONOTONIC, &end_device);
     
     // Transfer data back to host memory
