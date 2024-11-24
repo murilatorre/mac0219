@@ -5,12 +5,12 @@
 #include <cuda.h>
 #include <cuda_runtime.h>
 
-#define WALL_TEMP 20.0
+#define WALL_TEMP 20.0 
 #define BODY_TEMP 37.0
 
-#define BODY_X 5
-#define BODY_Y 5
-#define ROOM_SIZE 10
+#define BODY_X 3
+#define BODY_Y 9
+#define ROOM_SIZE 10 
 
 
 __global__ void jacobi_iteration(double *h, double *g, int n, int iter_limit)
@@ -19,7 +19,7 @@ __global__ void jacobi_iteration(double *h, double *g, int n, int iter_limit)
     int j = blockIdx.x * blockDim.x + threadIdx.x;  // column
 
     if (i > 0 && i < n - 1 && j > 0 && j < n - 1) {
-        g[i * n + j] = (i == (BODY_X * n) / ROOM_SIZE && j == (BODY_Y * n) / ROOM_SIZE) ? 
+        g[i * n + j] = (i == (BODY_Y * n) / ROOM_SIZE && j == (BODY_X * n) / ROOM_SIZE) ? 
                          h[i*n +j] : 0.25 * (h[(i - 1) * n + j] + h[(i + 1) * n + j] + h[i * n + (j - 1)] + h[i * n + (j + 1)]);
     } 
    
@@ -34,7 +34,7 @@ void jacobi_iteration_sequential(double *h, double *g, int n, int iter_limit)
     for (int iter = 0; iter < iter_limit; iter++) {
         for (int i = 1; i < n - 1; i++)
             for (int j = 1; j < n - 1; j++)
-                g[i * n + j] = (i == body_x && j == body_y) ?  h[i*n +j] : 
+                g[i * n + j] = (i == body_y && j == body_x) ?  h[i*n +j] : 
                                0.25 * (h[(i - 1) * n + j] + h[(i + 1) * n + j] + h[i * n + (j - 1)] + h[i * n + (j + 1)]);     
     
         for (int i = 1; i < n - 1; i++)
@@ -52,7 +52,7 @@ void initialize(double *h, int n)
     for (int i = 0; i < n; i++)
         for (int j = 0; j < n; j++) 
             if (i == 0 || i == n - 1 || j == 0 || j == n - 1)  h[i*n + j] = WALL_TEMP;
-            else if (i == body_x && j == body_y)               h[i*n + j] = BODY_TEMP;
+            else if (i == body_y && j == body_x)               h[i*n + j] = BODY_TEMP;
             else                                               h[i*n + j] = 0.0;
 }
 
