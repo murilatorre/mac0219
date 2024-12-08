@@ -161,8 +161,8 @@ int main(int argc, char *argv[])
     int height = n, width = 2*n;
     float tint = 1.0;
 
-    // pixels para representar uma imagem com altura n e largura 2n
-    // cada pixel é representado por 3 bytes (RGB)
+    // Vetor de pixels que representará uma imagem com altura n e largura 2n
+    // Cada pixel é representado por 3 bytes (RGB)
     unsigned char *pixels = (unsigned char *)malloc(3*height*width * sizeof(unsigned char));
     if (pixels == NULL) {
         fprintf(stderr, "Erro ao alocar memória para os pixels\n");

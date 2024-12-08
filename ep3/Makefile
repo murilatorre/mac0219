@@ -1,13 +1,17 @@
 CC = gcc
+MPICC = mpicc
 CFLAGS = -Wall -Wextra -O2
 
-TARGET = sequential_julia
-C_EXECUTABLE = $(TARGET)
+EXECUTABLES = sequential_julia 1D_parallel_julia
 
-all: $(C_EXECUTABLE)
+all: $(EXECUTABLES)
 
-$(C_EXECUTABLE): $(TARGET).c
+sequential_julia: sequential_julia.c
 	$(CC) $(CFLAGS) -o $@ $^ -lm
 
+
+1D_parallel_julia: 1D_parallel_julia.c
+	$(MPICC) -o $@ $^
+
 clean:
-	rm -f $(C_EXECUTABLE) julia.bmp
+	rm -f $(EXECUTABLES) julia.bmp
