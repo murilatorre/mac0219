@@ -153,7 +153,7 @@ int save_to_file(unsigned char *pixels, int width, int height)
 int main(int argc, char *argv[])
 {
     if (argc < 2) {
-        fprintf(stderr, "Uso: %s <inteiro positivo>\n", argv[0]);
+        fprintf(stderr, "Uso: %s <tamanho da imagem>\n", argv[0]);
         return 1;
     }
 
@@ -171,7 +171,7 @@ int main(int argc, char *argv[])
 
     for (int y = 0; y < height; y++)
         for (int x = 0; x < width; x++)
-            compute_julia_pixel(x, y, width, height, tint, &pixels[3*y*width + 3*x]);
+            compute_julia_pixel(x, y, width, height, tint, &pixels[3*(y*width + x)]);
 
     save_to_file(pixels, width, height);
 

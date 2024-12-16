@@ -6,9 +6,11 @@
 
 	- [x] Primeira Parte - Distribuição dos Dados
 
-	- [ ] Segunda Parte - Computação do Conjunto Usando MPI
-
+	- [x] Segunda Parte - Computação do Conjunto Usando MPI
+		
 	- [ ] Terceira Parte - Salvando num Arquivo
+	
+		- Devemos considerar o tempo de escrever no arquivo?
 
 - [ ] Tarefa 3 - Experimentos
 
