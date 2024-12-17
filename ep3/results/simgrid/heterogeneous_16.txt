@@ -1,0 +1,164 @@
+[Process 0 out of 16]: I should compute pixel rows 0 to 312, for a total of 313 rows
+[Process 1 out of 16]: I should compute pixel rows 313 to 625, for a total of 313 rows
+[Process 2 out of 16]: I should compute pixel rows 626 to 938, for a total of 313 rows
+[Process 3 out of 16]: I should compute pixel rows 939 to 1251, for a total of 313 rows
+[Process 4 out of 16]: I should compute pixel rows 1252 to 1564, for a total of 313 rows
+[Process 5 out of 16]: I should compute pixel rows 1565 to 1877, for a total of 313 rows
+[Process 6 out of 16]: I should compute pixel rows 1878 to 2190, for a total of 313 rows
+[Process 7 out of 16]: I should compute pixel rows 2191 to 2503, for a total of 313 rows
+[Process 8 out of 16]: I should compute pixel rows 2504 to 2815, for a total of 312 rows
+[Process 9 out of 16]: I should compute pixel rows 2816 to 3127, for a total of 312 rows
+[Process 10 out of 16]: I should compute pixel rows 3128 to 3439, for a total of 312 rows
+[Process 11 out of 16]: I should compute pixel rows 3440 to 3751, for a total of 312 rows
+[Process 12 out of 16]: I should compute pixel rows 3752 to 4063, for a total of 312 rows
+[Process 13 out of 16]: I should compute pixel rows 4064 to 4375, for a total of 312 rows
+[Process 14 out of 16]: I should compute pixel rows 4376 to 4687, for a total of 312 rows
+[Process 15 out of 16]: I should compute pixel rows 4688 to 4999, for a total of 312 rows
+[Process 0 out of 16]: Time elapsed during the job: 0.33s.
+[Process 1 out of 16]: Time elapsed during the job: 0.36s.
+[Process 2 out of 16]: Time elapsed during the job: 0.39s.
+[Process 3 out of 16]: Time elapsed during the job: 0.65s.
+[Process 4 out of 16]: Time elapsed during the job: 0.93s.
+[Process 5 out of 16]: Time elapsed during the job: 1.00s.
+[Process 6 out of 16]: Time elapsed during the job: 1.03s.
+[Process 7 out of 16]: Time elapsed during the job: 1.06s.
+[Process 8 out of 16]: Time elapsed during the job: 1.08s.
+[Process 9 out of 16]: Time elapsed during the job: 1.09s.
+[Process 10 out of 16]: Time elapsed during the job: 1.14s.
+[Process 11 out of 16]: Time elapsed during the job: 1.15s.
+[Process 12 out of 16]: Time elapsed during the job: 1.17s.
+[Process 13 out of 16]: Time elapsed during the job: 1.18s.
+[Process 14 out of 16]: Time elapsed during the job: 1.19s.
+[Process 15 out of 16]: Time elapsed during the job: 1.20s.
+
+[Process 0 out of 16]: I should compute pixel rows 0 to 312, for a total of 313 rows
+[Process 1 out of 16]: I should compute pixel rows 313 to 625, for a total of 313 rows
+[Process 2 out of 16]: I should compute pixel rows 626 to 938, for a total of 313 rows
+[Process 3 out of 16]: I should compute pixel rows 939 to 1251, for a total of 313 rows
+[Process 4 out of 16]: I should compute pixel rows 1252 to 1564, for a total of 313 rows
+[Process 5 out of 16]: I should compute pixel rows 1565 to 1877, for a total of 313 rows
+[Process 6 out of 16]: I should compute pixel rows 1878 to 2190, for a total of 313 rows
+[Process 7 out of 16]: I should compute pixel rows 2191 to 2503, for a total of 313 rows
+[Process 8 out of 16]: I should compute pixel rows 2504 to 2815, for a total of 312 rows
+[Process 9 out of 16]: I should compute pixel rows 2816 to 3127, for a total of 312 rows
+[Process 10 out of 16]: I should compute pixel rows 3128 to 3439, for a total of 312 rows
+[Process 11 out of 16]: I should compute pixel rows 3440 to 3751, for a total of 312 rows
+[Process 12 out of 16]: I should compute pixel rows 3752 to 4063, for a total of 312 rows
+[Process 13 out of 16]: I should compute pixel rows 4064 to 4375, for a total of 312 rows
+[Process 14 out of 16]: I should compute pixel rows 4376 to 4687, for a total of 312 rows
+[Process 15 out of 16]: I should compute pixel rows 4688 to 4999, for a total of 312 rows
+[Process 0 out of 16]: Time elapsed during the job: 0.32s.
+[Process 1 out of 16]: Time elapsed during the job: 0.36s.
+[Process 2 out of 16]: Time elapsed during the job: 0.38s.
+[Process 3 out of 16]: Time elapsed during the job: 0.53s.
+[Process 4 out of 16]: Time elapsed during the job: 0.75s.
+[Process 5 out of 16]: Time elapsed during the job: 0.98s.
+[Process 6 out of 16]: Time elapsed during the job: 1.02s.
+[Process 7 out of 16]: Time elapsed during the job: 1.05s.
+[Process 8 out of 16]: Time elapsed during the job: 1.06s.
+[Process 9 out of 16]: Time elapsed during the job: 1.07s.
+[Process 10 out of 16]: Time elapsed during the job: 1.08s.
+[Process 11 out of 16]: Time elapsed during the job: 1.09s.
+[Process 12 out of 16]: Time elapsed during the job: 1.11s.
+[Process 13 out of 16]: Time elapsed during the job: 1.12s.
+[Process 14 out of 16]: Time elapsed during the job: 1.13s.
+[Process 15 out of 16]: Time elapsed during the job: 1.14s.
+
+[Process 0 out of 16]: I should compute pixel rows 0 to 312, for a total of 313 rows
+[Process 1 out of 16]: I should compute pixel rows 313 to 625, for a total of 313 rows
+[Process 2 out of 16]: I should compute pixel rows 626 to 938, for a total of 313 rows
+[Process 3 out of 16]: I should compute pixel rows 939 to 1251, for a total of 313 rows
+[Process 4 out of 16]: I should compute pixel rows 1252 to 1564, for a total of 313 rows
+[Process 5 out of 16]: I should compute pixel rows 1565 to 1877, for a total of 313 rows
+[Process 6 out of 16]: I should compute pixel rows 1878 to 2190, for a total of 313 rows
+[Process 7 out of 16]: I should compute pixel rows 2191 to 2503, for a total of 313 rows
+[Process 8 out of 16]: I should compute pixel rows 2504 to 2815, for a total of 312 rows
+[Process 9 out of 16]: I should compute pixel rows 2816 to 3127, for a total of 312 rows
+[Process 10 out of 16]: I should compute pixel rows 3128 to 3439, for a total of 312 rows
+[Process 11 out of 16]: I should compute pixel rows 3440 to 3751, for a total of 312 rows
+[Process 12 out of 16]: I should compute pixel rows 3752 to 4063, for a total of 312 rows
+[Process 13 out of 16]: I should compute pixel rows 4064 to 4375, for a total of 312 rows
+[Process 14 out of 16]: I should compute pixel rows 4376 to 4687, for a total of 312 rows
+[Process 15 out of 16]: I should compute pixel rows 4688 to 4999, for a total of 312 rows
+[Process 0 out of 16]: Time elapsed during the job: 0.32s.
+[Process 1 out of 16]: Time elapsed during the job: 0.36s.
+[Process 2 out of 16]: Time elapsed during the job: 0.38s.
+[Process 3 out of 16]: Time elapsed during the job: 0.52s.
+[Process 4 out of 16]: Time elapsed during the job: 0.76s.
+[Process 5 out of 16]: Time elapsed during the job: 0.98s.
+[Process 6 out of 16]: Time elapsed during the job: 1.25s.
+[Process 7 out of 16]: Time elapsed during the job: 1.29s.
+[Process 8 out of 16]: Time elapsed during the job: 1.30s.
+[Process 9 out of 16]: Time elapsed during the job: 1.31s.
+[Process 10 out of 16]: Time elapsed during the job: 1.32s.
+[Process 11 out of 16]: Time elapsed during the job: 1.33s.
+[Process 12 out of 16]: Time elapsed during the job: 1.34s.
+[Process 13 out of 16]: Time elapsed during the job: 1.35s.
+[Process 14 out of 16]: Time elapsed during the job: 1.36s.
+[Process 15 out of 16]: Time elapsed during the job: 1.37s.
+
+[Process 0 out of 16]: I should compute pixel rows 0 to 312, for a total of 313 rows
+[Process 1 out of 16]: I should compute pixel rows 313 to 625, for a total of 313 rows
+[Process 2 out of 16]: I should compute pixel rows 626 to 938, for a total of 313 rows
+[Process 3 out of 16]: I should compute pixel rows 939 to 1251, for a total of 313 rows
+[Process 4 out of 16]: I should compute pixel rows 1252 to 1564, for a total of 313 rows
+[Process 5 out of 16]: I should compute pixel rows 1565 to 1877, for a total of 313 rows
+[Process 6 out of 16]: I should compute pixel rows 1878 to 2190, for a total of 313 rows
+[Process 7 out of 16]: I should compute pixel rows 2191 to 2503, for a total of 313 rows
+[Process 8 out of 16]: I should compute pixel rows 2504 to 2815, for a total of 312 rows
+[Process 9 out of 16]: I should compute pixel rows 2816 to 3127, for a total of 312 rows
+[Process 10 out of 16]: I should compute pixel rows 3128 to 3439, for a total of 312 rows
+[Process 11 out of 16]: I should compute pixel rows 3440 to 3751, for a total of 312 rows
+[Process 12 out of 16]: I should compute pixel rows 3752 to 4063, for a total of 312 rows
+[Process 13 out of 16]: I should compute pixel rows 4064 to 4375, for a total of 312 rows
+[Process 14 out of 16]: I should compute pixel rows 4376 to 4687, for a total of 312 rows
+[Process 15 out of 16]: I should compute pixel rows 4688 to 4999, for a total of 312 rows
+[Process 0 out of 16]: Time elapsed during the job: 0.31s.
+[Process 1 out of 16]: Time elapsed during the job: 0.36s.
+[Process 2 out of 16]: Time elapsed during the job: 0.38s.
+[Process 3 out of 16]: Time elapsed during the job: 0.53s.
+[Process 4 out of 16]: Time elapsed during the job: 0.75s.
+[Process 5 out of 16]: Time elapsed during the job: 0.98s.
+[Process 6 out of 16]: Time elapsed during the job: 1.02s.
+[Process 7 out of 16]: Time elapsed during the job: 1.06s.
+[Process 8 out of 16]: Time elapsed during the job: 1.07s.
+[Process 9 out of 16]: Time elapsed during the job: 1.08s.
+[Process 10 out of 16]: Time elapsed during the job: 1.09s.
+[Process 11 out of 16]: Time elapsed during the job: 1.10s.
+[Process 12 out of 16]: Time elapsed during the job: 1.11s.
+[Process 13 out of 16]: Time elapsed during the job: 1.11s.
+[Process 14 out of 16]: Time elapsed during the job: 1.12s.
+[Process 15 out of 16]: Time elapsed during the job: 1.13s.
+
+[Process 0 out of 16]: I should compute pixel rows 0 to 312, for a total of 313 rows
+[Process 1 out of 16]: I should compute pixel rows 313 to 625, for a total of 313 rows
+[Process 2 out of 16]: I should compute pixel rows 626 to 938, for a total of 313 rows
+[Process 3 out of 16]: I should compute pixel rows 939 to 1251, for a total of 313 rows
+[Process 4 out of 16]: I should compute pixel rows 1252 to 1564, for a total of 313 rows
+[Process 5 out of 16]: I should compute pixel rows 1565 to 1877, for a total of 313 rows
+[Process 6 out of 16]: I should compute pixel rows 1878 to 2190, for a total of 313 rows
+[Process 7 out of 16]: I should compute pixel rows 2191 to 2503, for a total of 313 rows
+[Process 8 out of 16]: I should compute pixel rows 2504 to 2815, for a total of 312 rows
+[Process 9 out of 16]: I should compute pixel rows 2816 to 3127, for a total of 312 rows
+[Process 10 out of 16]: I should compute pixel rows 3128 to 3439, for a total of 312 rows
+[Process 11 out of 16]: I should compute pixel rows 3440 to 3751, for a total of 312 rows
+[Process 12 out of 16]: I should compute pixel rows 3752 to 4063, for a total of 312 rows
+[Process 13 out of 16]: I should compute pixel rows 4064 to 4375, for a total of 312 rows
+[Process 14 out of 16]: I should compute pixel rows 4376 to 4687, for a total of 312 rows
+[Process 15 out of 16]: I should compute pixel rows 4688 to 4999, for a total of 312 rows
+[Process 0 out of 16]: Time elapsed during the job: 0.32s.
+[Process 1 out of 16]: Time elapsed during the job: 0.36s.
+[Process 2 out of 16]: Time elapsed during the job: 0.47s.
+[Process 3 out of 16]: Time elapsed during the job: 0.61s.
+[Process 4 out of 16]: Time elapsed during the job: 0.75s.
+[Process 5 out of 16]: Time elapsed during the job: 1.20s.
+[Process 6 out of 16]: Time elapsed during the job: 1.21s.
+[Process 7 out of 16]: Time elapsed during the job: 1.22s.
+[Process 8 out of 16]: Time elapsed during the job: 1.23s.
+[Process 9 out of 16]: Time elapsed during the job: 1.24s.
+[Process 10 out of 16]: Time elapsed during the job: 1.61s.
+[Process 11 out of 16]: Time elapsed during the job: 1.62s.
+[Process 12 out of 16]: Time elapsed during the job: 1.63s.
+[Process 13 out of 16]: Time elapsed during the job: 1.64s.
+[Process 14 out of 16]: Time elapsed during the job: 1.65s.
+[Process 15 out of 16]: Time elapsed during the job: 1.66s.

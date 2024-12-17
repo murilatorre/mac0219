@@ -7,10 +7,7 @@ PROCESS_COUNTS=(2 4 8 10)
 SIMGRID_LATENCY=(10 100 500)
 SEQ_EXEC="./sequential_julia"
 MPICH_EXEC="./1D_parallel_julia"  # Executável MPICH
-SIMGRID_EXEC="./julia_simgrid" # Executável SimGrid
 RESULTS_DIR="results"
-SIMGRID_XML="simple_cluster.xml"
-SIMGRID_HOSTFILE="simple_cluster_hostfile.txt"
 
 # Criação de diretórios
 mkdir -p $RESULTS_DIR/sequential $RESULTS_DIR/mpich # $RESULTS_DIR/simgrid_homogeneous $RESULTS_DIR/simgrid_heterogeneous
@@ -48,4 +45,3 @@ run_seq
 run_mpich
 
 echo "### Todos os testes foram concluídos! ###"
-make clean

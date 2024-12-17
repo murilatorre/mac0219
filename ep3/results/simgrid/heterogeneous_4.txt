@@ -1,0 +1,44 @@
+[Process 0 out of 4]: I should compute pixel rows 0 to 1249, for a total of 1250 rows
+[Process 1 out of 4]: I should compute pixel rows 1250 to 2499, for a total of 1250 rows
+[Process 2 out of 4]: I should compute pixel rows 2500 to 3749, for a total of 1250 rows
+[Process 3 out of 4]: I should compute pixel rows 3750 to 4999, for a total of 1250 rows
+[Process 0 out of 4]: Time elapsed during the job: 1.52s.
+[Process 1 out of 4]: Time elapsed during the job: 3.80s.
+[Process 2 out of 4]: Time elapsed during the job: 3.84s.
+[Process 3 out of 4]: Time elapsed during the job: 3.89s.
+
+[Process 0 out of 4]: I should compute pixel rows 0 to 1249, for a total of 1250 rows
+[Process 1 out of 4]: I should compute pixel rows 1250 to 2499, for a total of 1250 rows
+[Process 2 out of 4]: I should compute pixel rows 2500 to 3749, for a total of 1250 rows
+[Process 3 out of 4]: I should compute pixel rows 3750 to 4999, for a total of 1250 rows
+[Process 0 out of 4]: Time elapsed during the job: 1.53s.
+[Process 1 out of 4]: Time elapsed during the job: 3.82s.
+[Process 2 out of 4]: Time elapsed during the job: 3.86s.
+[Process 3 out of 4]: Time elapsed during the job: 3.91s.
+
+[Process 0 out of 4]: I should compute pixel rows 0 to 1249, for a total of 1250 rows
+[Process 1 out of 4]: I should compute pixel rows 1250 to 2499, for a total of 1250 rows
+[Process 2 out of 4]: I should compute pixel rows 2500 to 3749, for a total of 1250 rows
+[Process 3 out of 4]: I should compute pixel rows 3750 to 4999, for a total of 1250 rows
+[Process 0 out of 4]: Time elapsed during the job: 1.61s.
+[Process 1 out of 4]: Time elapsed during the job: 4.04s.
+[Process 2 out of 4]: Time elapsed during the job: 4.09s.
+[Process 3 out of 4]: Time elapsed during the job: 4.13s.
+
+[Process 0 out of 4]: I should compute pixel rows 0 to 1249, for a total of 1250 rows
+[Process 1 out of 4]: I should compute pixel rows 1250 to 2499, for a total of 1250 rows
+[Process 2 out of 4]: I should compute pixel rows 2500 to 3749, for a total of 1250 rows
+[Process 3 out of 4]: I should compute pixel rows 3750 to 4999, for a total of 1250 rows
+[Process 0 out of 4]: Time elapsed during the job: 1.92s.
+[Process 1 out of 4]: Time elapsed during the job: 4.75s.
+[Process 2 out of 4]: Time elapsed during the job: 4.80s.
+[Process 3 out of 4]: Time elapsed during the job: 4.84s.
+
+[Process 0 out of 4]: I should compute pixel rows 0 to 1249, for a total of 1250 rows
+[Process 1 out of 4]: I should compute pixel rows 1250 to 2499, for a total of 1250 rows
+[Process 2 out of 4]: I should compute pixel rows 2500 to 3749, for a total of 1250 rows
+[Process 3 out of 4]: I should compute pixel rows 3750 to 4999, for a total of 1250 rows
+[Process 0 out of 4]: Time elapsed during the job: 2.06s.
+[Process 1 out of 4]: Time elapsed during the job: 4.58s.
+[Process 2 out of 4]: Time elapsed during the job: 4.64s.
+[Process 3 out of 4]: Time elapsed during the job: 4.69s.

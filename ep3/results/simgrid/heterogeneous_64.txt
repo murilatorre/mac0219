@@ -1,0 +1,129 @@
+
+[Process 0 out of 64]: I should compute pixel rows 0 to 78, for a total of 79 rows
+[Process 1 out of 64]: I should compute pixel rows 79 to 157, for a total of 79 rows
+[Process 2 out of 64]: I should compute pixel rows 158 to 236, for a total of 79 rows
+[Process 3 out of 64]: I should compute pixel rows 237 to 315, for a total of 79 rows
+[Process 4 out of 64]: I should compute pixel rows 316 to 394, for a total of 79 rows
+[Process 5 out of 64]: I should compute pixel rows 395 to 473, for a total of 79 rows
+[Process 6 out of 64]: I should compute pixel rows 474 to 552, for a total of 79 rows
+[Process 7 out of 64]: I should compute pixel rows 553 to 631, for a total of 79 rows
+[Process 8 out of 64]: I should compute pixel rows 632 to 709, for a total of 78 rows
+[Process 9 out of 64]: I should compute pixel rows 710 to 787, for a total of 78 rows
+[Process 10 out of 64]: I should compute pixel rows 788 to 865, for a total of 78 rows
+[Process 11 out of 64]: I should compute pixel rows 866 to 943, for a total of 78 rows
+[Process 12 out of 64]: I should compute pixel rows 944 to 1021, for a total of 78 rows
+[Process 13 out of 64]: I should compute pixel rows 1022 to 1099, for a total of 78 rows
+[Process 14 out of 64]: I should compute pixel rows 1100 to 1177, for a total of 78 rows
+[Process 15 out of 64]: I should compute pixel rows 1178 to 1255, for a total of 78 rows
+[Process 16 out of 64]: I should compute pixel rows 1256 to 1333, for a total of 78 rows
+[Process 17 out of 64]: I should compute pixel rows 1334 to 1411, for a total of 78 rows
+[Process 18 out of 64]: I should compute pixel rows 1412 to 1489, for a total of 78 rows
+[Process 19 out of 64]: I should compute pixel rows 1490 to 1567, for a total of 78 rows
+[Process 20 out of 64]: I should compute pixel rows 1568 to 1645, for a total of 78 rows
+[Process 21 out of 64]: I should compute pixel rows 1646 to 1723, for a total of 78 rows
+[Process 22 out of 64]: I should compute pixel rows 1724 to 1801, for a total of 78 rows
+[Process 23 out of 64]: I should compute pixel rows 1802 to 1879, for a total of 78 rows
+[Process 24 out of 64]: I should compute pixel rows 1880 to 1957, for a total of 78 rows
+[Process 25 out of 64]: I should compute pixel rows 1958 to 2035, for a total of 78 rows
+[Process 26 out of 64]: I should compute pixel rows 2036 to 2113, for a total of 78 rows
+[Process 27 out of 64]: I should compute pixel rows 2114 to 2191, for a total of 78 rows
+[Process 28 out of 64]: I should compute pixel rows 2192 to 2269, for a total of 78 rows
+[Process 29 out of 64]: I should compute pixel rows 2270 to 2347, for a total of 78 rows
+[Process 30 out of 64]: I should compute pixel rows 2348 to 2425, for a total of 78 rows
+[Process 31 out of 64]: I should compute pixel rows 2426 to 2503, for a total of 78 rows
+[Process 32 out of 64]: I should compute pixel rows 2504 to 2581, for a total of 78 rows
+[Process 33 out of 64]: I should compute pixel rows 2582 to 2659, for a total of 78 rows
+[Process 34 out of 64]: I should compute pixel rows 2660 to 2737, for a total of 78 rows
+[Process 35 out of 64]: I should compute pixel rows 2738 to 2815, for a total of 78 rows
+[Process 36 out of 64]: I should compute pixel rows 2816 to 2893, for a total of 78 rows
+[Process 37 out of 64]: I should compute pixel rows 2894 to 2971, for a total of 78 rows
+[Process 38 out of 64]: I should compute pixel rows 2972 to 3049, for a total of 78 rows
+[Process 39 out of 64]: I should compute pixel rows 3050 to 3127, for a total of 78 rows
+[Process 40 out of 64]: I should compute pixel rows 3128 to 3205, for a total of 78 rows
+[Process 41 out of 64]: I should compute pixel rows 3206 to 3283, for a total of 78 rows
+[Process 42 out of 64]: I should compute pixel rows 3284 to 3361, for a total of 78 rows
+[Process 43 out of 64]: I should compute pixel rows 3362 to 3439, for a total of 78 rows
+[Process 44 out of 64]: I should compute pixel rows 3440 to 3517, for a total of 78 rows
+[Process 45 out of 64]: I should compute pixel rows 3518 to 3595, for a total of 78 rows
+[Process 46 out of 64]: I should compute pixel rows 3596 to 3673, for a total of 78 rows
+[Process 47 out of 64]: I should compute pixel rows 3674 to 3751, for a total of 78 rows
+[Process 48 out of 64]: I should compute pixel rows 3752 to 3829, for a total of 78 rows
+[Process 49 out of 64]: I should compute pixel rows 3830 to 3907, for a total of 78 rows
+[Process 50 out of 64]: I should compute pixel rows 3908 to 3985, for a total of 78 rows
+[Process 51 out of 64]: I should compute pixel rows 3986 to 4063, for a total of 78 rows
+[Process 52 out of 64]: I should compute pixel rows 4064 to 4141, for a total of 78 rows
+[Process 53 out of 64]: I should compute pixel rows 4142 to 4219, for a total of 78 rows
+[Process 54 out of 64]: I should compute pixel rows 4220 to 4297, for a total of 78 rows
+[Process 55 out of 64]: I should compute pixel rows 4298 to 4375, for a total of 78 rows
+[Process 56 out of 64]: I should compute pixel rows 4376 to 4453, for a total of 78 rows
+[Process 57 out of 64]: I should compute pixel rows 4454 to 4531, for a total of 78 rows
+[Process 58 out of 64]: I should compute pixel rows 4532 to 4609, for a total of 78 rows
+[Process 59 out of 64]: I should compute pixel rows 4610 to 4687, for a total of 78 rows
+[Process 60 out of 64]: I should compute pixel rows 4688 to 4765, for a total of 78 rows
+[Process 61 out of 64]: I should compute pixel rows 4766 to 4843, for a total of 78 rows
+[Process 62 out of 64]: I should compute pixel rows 4844 to 4921, for a total of 78 rows
+[Process 63 out of 64]: I should compute pixel rows 4922 to 4999, for a total of 78 rows
+[Process 0 out of 64]: Time elapsed during the job: 0.10s.
+[Process 1 out of 64]: Time elapsed during the job: 0.10s.
+[Process 2 out of 64]: Time elapsed during the job: 0.10s.
+[Process 3 out of 64]: Time elapsed during the job: 0.11s.
+[Process 4 out of 64]: Time elapsed during the job: 0.11s.
+[Process 5 out of 64]: Time elapsed during the job: 0.11s.
+[Process 6 out of 64]: Time elapsed during the job: 0.11s.
+[Process 7 out of 64]: Time elapsed during the job: 0.12s.
+[Process 8 out of 64]: Time elapsed during the job: 0.12s.
+[Process 9 out of 64]: Time elapsed during the job: 0.12s.
+[Process 10 out of 64]: Time elapsed during the job: 0.12s.
+[Process 11 out of 64]: Time elapsed during the job: 0.13s.
+[Process 12 out of 64]: Time elapsed during the job: 0.13s.
+[Process 13 out of 64]: Time elapsed during the job: 0.13s.
+[Process 14 out of 64]: Time elapsed during the job: 0.13s.
+[Process 15 out of 64]: Time elapsed during the job: 0.14s.
+[Process 16 out of 64]: Time elapsed during the job: 0.17s.
+[Process 17 out of 64]: Time elapsed during the job: 0.20s.
+[Process 18 out of 64]: Time elapsed during the job: 0.20s.
+[Process 19 out of 64]: Time elapsed during the job: 0.20s.
+[Process 20 out of 64]: Time elapsed during the job: 0.22s.
+[Process 21 out of 64]: Time elapsed during the job: 0.24s.
+[Process 22 out of 64]: Time elapsed during the job: 0.25s.
+[Process 23 out of 64]: Time elapsed during the job: 0.27s.
+[Process 24 out of 64]: Time elapsed during the job: 0.27s.
+[Process 25 out of 64]: Time elapsed during the job: 0.27s.
+[Process 26 out of 64]: Time elapsed during the job: 0.27s.
+[Process 27 out of 64]: Time elapsed during the job: 0.28s.
+[Process 28 out of 64]: Time elapsed during the job: 0.28s.
+[Process 29 out of 64]: Time elapsed during the job: 0.28s.
+[Process 30 out of 64]: Time elapsed during the job: 0.29s.
+[Process 31 out of 64]: Time elapsed during the job: 0.29s.
+[Process 32 out of 64]: Time elapsed during the job: 0.29s.
+[Process 33 out of 64]: Time elapsed during the job: 0.29s.
+[Process 34 out of 64]: Time elapsed during the job: 0.30s.
+[Process 35 out of 64]: Time elapsed during the job: 0.30s.
+[Process 36 out of 64]: Time elapsed during the job: 0.30s.
+[Process 37 out of 64]: Time elapsed during the job: 0.31s.
+[Process 38 out of 64]: Time elapsed during the job: 0.31s.
+[Process 39 out of 64]: Time elapsed during the job: 0.31s.
+[Process 40 out of 64]: Time elapsed during the job: 0.31s.
+[Process 41 out of 64]: Time elapsed during the job: 0.32s.
+[Process 42 out of 64]: Time elapsed during the job: 0.32s.
+[Process 43 out of 64]: Time elapsed during the job: 0.32s.
+[Process 44 out of 64]: Time elapsed during the job: 0.33s.
+[Process 45 out of 64]: Time elapsed during the job: 0.33s.
+[Process 46 out of 64]: Time elapsed during the job: 0.33s.
+[Process 47 out of 64]: Time elapsed during the job: 0.33s.
+[Process 48 out of 64]: Time elapsed during the job: 0.34s.
+[Process 49 out of 64]: Time elapsed during the job: 0.34s.
+[Process 50 out of 64]: Time elapsed during the job: 0.34s.
+[Process 51 out of 64]: Time elapsed during the job: 0.35s.
+[Process 52 out of 64]: Time elapsed during the job: 0.35s.
+[Process 53 out of 64]: Time elapsed during the job: 0.35s.
+[Process 54 out of 64]: Time elapsed during the job: 0.35s.
+[Process 55 out of 64]: Time elapsed during the job: 0.36s.
+[Process 56 out of 64]: Time elapsed during the job: 0.36s.
+[Process 57 out of 64]: Time elapsed during the job: 0.36s.
+[Process 58 out of 64]: Time elapsed during the job: 0.37s.
+[Process 59 out of 64]: Time elapsed during the job: 0.37s.
+[Process 60 out of 64]: Time elapsed during the job: 0.37s.
+[Process 61 out of 64]: Time elapsed during the job: 0.37s.
+[Process 62 out of 64]: Time elapsed during the job: 0.38s.
+[Process 63 out of 64]: Time elapsed during the job: 0.38s.
