@@ -2,15 +2,13 @@
 
 - [x] Tarefa 1 - Versão Sequencial (sequential_julia.c + Makefile)
 
-- [ ] Tarefa 2 - Versão Paralela (1D_parallel_julia.c. + Makefile)
+- [x] Tarefa 2 - Versão Paralela (1D_parallel_julia.c. + Makefile)
 
 	- [x] Primeira Parte - Distribuição dos Dados
 
 	- [x] Segunda Parte - Computação do Conjunto Usando MPI
 		
-	- [ ] Terceira Parte - Salvando num Arquivo
-	
-		- Devemos considerar o tempo de escrever no arquivo?
+	- [x] Terceira Parte - Salvando num Arquivo
 
 - [ ] Tarefa 3 - Experimentos
 
