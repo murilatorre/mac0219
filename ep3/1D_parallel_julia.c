@@ -164,7 +164,7 @@ int main(int argc, char *argv[])  {
         return -1;
     }
 
-    printf("[Process %d out of %d]: I should compute pixel rows %d to %d, for a total of %d rows\n", rank, numtasks, start, end, numrows);
+    // printf("[Process %d out of %d]: I should compute pixel rows %d to %d, for a total of %d rows\n", rank, numtasks, start, end, numrows);
     
     double start_time = MPI_Wtime();
 
@@ -176,15 +176,17 @@ int main(int argc, char *argv[])  {
     }
 
     if (rank == 0) {
+        /*
         FILE *file = fopen(filename, "w");
         if (write_bmp_header(file, width, height)) {
             fprintf(stderr, "Erro ao escrever o cabeçalho BMP.\n");
             fclose(file); MPI_Finalize();
             return -1;
         }
+        */
 
-        write_bmp_lines(file, pixels, width, numrows);
-        fclose(file);
+        // write_bmp_lines(file, pixels, width, numrows);
+        // fclose(file);
 
         int auth = 1;
         MPI_Send(&auth, 1, MPI_INT, rank + 1, 0, MPI_COMM_WORLD);
@@ -192,9 +194,9 @@ int main(int argc, char *argv[])  {
         int auth_recv;
         MPI_Recv(&auth_recv, 1, MPI_INT, rank - 1, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 
-        FILE *file = fopen(filename, "a");
-        write_bmp_lines(file, pixels, width, numrows);
-        fclose(file);
+        // FILE *file = fopen(filename, "a");
+        // write_bmp_lines(file, pixels, width, numrows);
+        // fclose(file);
 
         if (rank < numtasks - 1) {
             MPI_Send(&auth_recv, 1, MPI_INT, rank + 1, 0, MPI_COMM_WORLD);
@@ -202,7 +204,7 @@ int main(int argc, char *argv[])  {
     }
 
     double end_time = MPI_Wtime();
-    printf("[Process %d out of %d]: Time elapsed during the job: %.2fs.\n", rank, numtasks, (end_time-start_time));  
+    // printf("[Process %d out of %d]: Time elapsed during the job: %.2fs.\n", rank, numtasks, (end_time-start_time));  
 
     free(pixels);
     MPI_Finalize();

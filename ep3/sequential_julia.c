@@ -173,7 +173,7 @@ int main(int argc, char *argv[])
         for (int x = 0; x < width; x++)
             compute_julia_pixel(x, y, width, height, tint, &pixels[3*(y*width + x)]);
 
-    save_to_file(pixels, width, height);
+    // save_to_file(pixels, width, height);
 
     free(pixels);
 

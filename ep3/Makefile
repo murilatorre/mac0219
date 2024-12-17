@@ -1,5 +1,5 @@
 CC = gcc
-MPICC = smpicc
+MPICC = mpicc
 CFLAGS = -Wall -Wextra -O2
 
 EXECUTABLES = sequential_julia 1D_parallel_julia
