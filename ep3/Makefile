@@ -11,7 +11,7 @@ sequential_julia: sequential_julia.c
 
 
 1D_parallel_julia: 1D_parallel_julia.c
-	$(MPICC) -o $@ $^ -lm
+	$(MPICC) -O3 -o $@ $^ -lm
 
 clean:
 	rm -f $(EXECUTABLES) julia.bmp parallel_julia.bmp

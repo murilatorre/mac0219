@@ -116,6 +116,16 @@ int write_bmp_header(FILE *f, int width, int height) {
 }
 
 
+/*
+ * write_bmp_lines(): escreve no arquivo um conjunto de linhas da imagem.
+ *
+ *  Entrada:
+ *      file:             um arquivo aberto com escrita
+ *      pixels:           conjunto de pixels que desejamos escrver no arquivo
+ *      (numrows, width): número de linhas que vamos escrever e a largura da imagem
+ *  
+ */
+
 void write_bmp_lines(FILE *file, unsigned char *pixels, int width, int numrows) {
     for (int i = 0; i < numrows; i++) {
         fwrite(&pixels[i * width * 3], sizeof(unsigned char), width * 3, file); 
@@ -182,7 +192,7 @@ int main(int argc, char *argv[])  {
             fclose(file); MPI_Finalize();
             return -1;
         }
-
+        
         write_bmp_lines(file, pixels, width, numrows);
         fclose(file);
 
