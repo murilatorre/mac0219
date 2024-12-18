@@ -4,6 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Diretórios de resultados
+SIMGRID_DIR = "results/simgrid"
 MPICH_DIR = "results/mpich"
 SEQUENTIAL_DIR = "results/sequential"
 OUTPUT_DIR = "plots"
@@ -40,6 +41,68 @@ def process_mpich():
             times = read_times(os.path.join(MPICH_DIR, file_name))
             mpich_results[(size, procs)] = {"mean": np.mean(times), "std": np.std(times), "times": times}
     return mpich_results
+
+
+def process_heterogeneous(file_path):
+    """
+    Processa os dados de execução de nós de um arquivo heterogêneo.
+    
+    Args:
+        file_path (str): Caminho para o arquivo com os dados.
+    
+    Returns:
+        dict: Um dicionário onde as chaves são os IDs dos processos (nós) 
+              e os valores são listas de tempos de execução correspondentes aos testes.
+    """
+    results = {}
+    
+    with open(file_path, 'r') as file:
+        lines = file.readlines()
+        
+        for line in lines:
+            match = re.search(r"\[Process (\d+) out of (\d+)\]: Time elapsed during the job: ([\d.]+)s", line)
+            if match:
+                process_id = int(match.group(1))
+                time = float(match.group(3))
+                
+                if process_id not in results:
+                    results[process_id] = []
+                results[process_id].append(time)
+    
+    return results
+
+def process_all_heterogeneous():
+    """
+    Processa todos os arquivos em um diretório e extrai os tempos de execução,
+    retornando-os no formato esperado pela função de plotagem.
+
+    Returns:
+        dict: Um dicionário onde as chaves são o número de nós e os valores
+              são listas de tempos de execução por processo (em formato adequado).
+    """
+    all_results = {}
+
+    # Processa cada arquivo no diretório
+    for file_name in os.listdir(SIMGRID_DIR):
+        if file_name.startswith("heterogeneous_") and file_name.endswith(".txt"):
+            num_nodes = int(file_name.split("_")[1].split(".")[0])  # Extrai o número de nós
+            file_path = os.path.join(SIMGRID_DIR, file_name)
+            results = process_heterogeneous(file_path)
+            
+            # Converter os dados para o formato desejado
+            node_times = []
+            for node_id in range(1, num_nodes + 1):
+                if node_id in results:
+                    node_times.append(results[node_id])
+                else:
+                    # Se algum nó não tiver tempo registrado, adicionamos uma lista vazia
+                    node_times.append([])
+            
+            all_results[num_nodes] = node_times
+    
+    return all_results
+
+
 
 def plot_sequential_vs_parallel(sequential, mpich_results):
     """
@@ -168,6 +231,49 @@ def plot_efficiency(mpich_results, fixed_size=1000):
     plt.savefig(f"{OUTPUT_DIR}/efficiency_{fixed_size}.png")
     # plt.show()
 
+def plot_process_execution_impact(data):
+    """
+    Gera gráficos que analisam o impacto no tempo de execução de cada processo
+    e como a variação de capacidade computacional entre os nós afeta o desempenho global.
+
+    Parâmetros:
+        data: dict
+            Estrutura {n_nodes: [[tempo_no1, tempo_no2, ...], ...]} para 10 testes.
+    """
+    # Definir a figura e os eixos
+    plt.figure(figsize=(14, 8))
+
+    # Analisar cada configuração de número de nós
+    n_nodes_list = sorted(data.keys())
+    
+    for n_nodes in n_nodes_list:
+        times = data[n_nodes]  # Lista de tempos de execução para cada nó
+        
+        # Se houver múltiplos tempos para diferentes processos, cada conjunto de tempos será tratado separadamente
+        for i, process_times in enumerate(times):
+            avg_time = np.mean(process_times)  # Tempo médio por processo
+            plt.loglog([n_nodes] * len(process_times), process_times, 'o', alpha=0.7)
+
+        valid_times = [np.mean(process_times) for process_times in times if len(process_times) > 0]
+        if valid_times:  # Garantir que existam valores válidos antes de calcular a média global
+            avg_global_time = np.mean(valid_times)
+            # Plotar a média global como um único ponto visível
+            plt.plot([n_nodes], [avg_global_time], 'kX', markersize=10, label=f"Média Global ({n_nodes} nós)", linewidth=2)
+
+    # Personalizar o gráfico
+    plt.title("Impacto no Tempo de Execução de Cada Processo")
+    plt.xlabel("Número de Nós")
+    plt.ylabel("Tempo de Execução (s)")
+    plt.xticks(n_nodes_list, labels=[str(n) for n in n_nodes_list])
+
+    plt.grid(True, linestyle="--", linewidth=0.5)
+    plt.legend(loc="upper right")
+    plt.tight_layout()
+    
+    # Salvar e exibir o gráfico
+    plt.savefig(f"{OUTPUT_DIR}/process_execution_impact.png")
+    plt.show()
+
 
 # Função principal
 def main():
@@ -184,12 +290,15 @@ def main():
     # plot_sequential_vs_parallel(sequential, mpich)
     
     print("Gerando gráficos de Speedup...")
-    plot_speedup(sequential, mpich)
+    # plot_speedup(sequential, mpich)
     
     print("Gerando gráficos de Eficiência...")
     # for size in sizes:
     #    plot_efficiency(mpich, size)
     
+    print("Gerando gráficos e dados")
+    plot_process_execution_impact(process_all_heterogeneous())
+
     print(f"Gráficos salvos no diretório '{OUTPUT_DIR}'.")
 
 if __name__ == "__main__":

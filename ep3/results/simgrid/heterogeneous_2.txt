@@ -1,24 +1,40 @@
 [Process 0 out of 2]: I should compute pixel rows 0 to 2499, for a total of 2500 rows
 [Process 1 out of 2]: I should compute pixel rows 2500 to 4999, for a total of 2500 rows
-[Process 0 out of 2]: Time elapsed during the job: 5.16s.
-[Process 1 out of 2]: Time elapsed during the job: 6.07s.
-
+[Process 0 out of 2]: Time elapsed during the job: 2.50s.
+[Process 1 out of 2]: Time elapsed during the job: 2.63s.
 [Process 0 out of 2]: I should compute pixel rows 0 to 2499, for a total of 2500 rows
 [Process 1 out of 2]: I should compute pixel rows 2500 to 4999, for a total of 2500 rows
-[Process 0 out of 2]: Time elapsed during the job: 5.14s.
-[Process 1 out of 2]: Time elapsed during the job: 5.38s.
-
+[Process 0 out of 2]: Time elapsed during the job: 2.50s.
+[Process 1 out of 2]: Time elapsed during the job: 2.63s.
 [Process 0 out of 2]: I should compute pixel rows 0 to 2499, for a total of 2500 rows
 [Process 1 out of 2]: I should compute pixel rows 2500 to 4999, for a total of 2500 rows
-[Process 0 out of 2]: Time elapsed during the job: 5.16s.
-[Process 1 out of 2]: Time elapsed during the job: 5.38s.
-
+[Process 1 out of 2]: Time elapsed during the job: 2.64s.
+[Process 0 out of 2]: Time elapsed during the job: 5.39s.
 [Process 0 out of 2]: I should compute pixel rows 0 to 2499, for a total of 2500 rows
 [Process 1 out of 2]: I should compute pixel rows 2500 to 4999, for a total of 2500 rows
-[Process 0 out of 2]: Time elapsed during the job: 5.65s.
-[Process 1 out of 2]: Time elapsed during the job: 6.52s.
-
+[Process 1 out of 2]: Time elapsed during the job: 2.63s.
+[Process 0 out of 2]: Time elapsed during the job: 5.38s.
 [Process 0 out of 2]: I should compute pixel rows 0 to 2499, for a total of 2500 rows
 [Process 1 out of 2]: I should compute pixel rows 2500 to 4999, for a total of 2500 rows
-[Process 0 out of 2]: Time elapsed during the job: 5.25s.
-[Process 1 out of 2]: Time elapsed during the job: 6.11s.
+[Process 1 out of 2]: Time elapsed during the job: 2.67s.
+[Process 0 out of 2]: Time elapsed during the job: 5.39s.
+[Process 0 out of 2]: I should compute pixel rows 0 to 2499, for a total of 2500 rows
+[Process 1 out of 2]: I should compute pixel rows 2500 to 4999, for a total of 2500 rows
+[Process 1 out of 2]: Time elapsed during the job: 2.63s.
+[Process 0 out of 2]: Time elapsed during the job: 5.42s.
+[Process 0 out of 2]: I should compute pixel rows 0 to 2499, for a total of 2500 rows
+[Process 1 out of 2]: I should compute pixel rows 2500 to 4999, for a total of 2500 rows
+[Process 1 out of 2]: Time elapsed during the job: 2.67s.
+[Process 0 out of 2]: Time elapsed during the job: 5.40s.
+[Process 0 out of 2]: I should compute pixel rows 0 to 2499, for a total of 2500 rows
+[Process 1 out of 2]: I should compute pixel rows 2500 to 4999, for a total of 2500 rows
+[Process 0 out of 2]: Time elapsed during the job: 2.53s.
+[Process 1 out of 2]: Time elapsed during the job: 2.63s.
+[Process 0 out of 2]: I should compute pixel rows 0 to 2499, for a total of 2500 rows
+[Process 1 out of 2]: I should compute pixel rows 2500 to 4999, for a total of 2500 rows
+[Process 1 out of 2]: Time elapsed during the job: 3.19s.
+[Process 0 out of 2]: Time elapsed during the job: 4.84s.
+[Process 0 out of 2]: I should compute pixel rows 0 to 2499, for a total of 2500 rows
+[Process 1 out of 2]: I should compute pixel rows 2500 to 4999, for a total of 2500 rows
+[Process 1 out of 2]: Time elapsed during the job: 2.91s.
+[Process 0 out of 2]: Time elapsed during the job: 5.11s.

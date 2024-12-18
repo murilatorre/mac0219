@@ -3,10 +3,14 @@
 # Parâmetros de configuração
 ITERATIONS=10
 IMAGE_SIZES=(500 1000 5000)
-PROCESS_COUNTS=(2 4 8 10)
+PROCESS_COUNTS_MPICH=(2 4 8 10)
+PROCESS_COUNTS_SIMGRID=(2 4 8 16 32 64)
 SIMGRID_LATENCY=(10 100 500)
 SEQ_EXEC="./sequential_julia"
 MPICH_EXEC="./1D_parallel_julia"  # Executável MPICH
+SIMGRID_EXEC="./1D_parallel_julia"
+HETEROGENEOUS_CLUSTER="simple_cluster.xml"
+HOSTFILE="simple_cluster_hostfile.txt"
 RESULTS_DIR="results"
 
 # Criação de diretórios
@@ -30,7 +34,7 @@ run_seq() {
 run_mpich() {
     echo "### Executando Testes com MPICH ###"
     for SIZE in "${IMAGE_SIZES[@]}"; do
-        for PROC in "${PROCESS_COUNTS[@]}"; do
+        for PROC in "${PROCESS_COUNTS_MPICH[@]}"; do
             OUTPUT_FILE="$RESULTS_DIR/mpich/mpich_${SIZE}_${PROC}.txt"
             echo "Imagem: $SIZE, Processos: $PROC"
             for ((i=1; i<=$ITERATIONS; i++)); do
@@ -40,8 +44,24 @@ run_mpich() {
     done
 }
 
+
+# Função para executar testes com MPICH
+run_simgrid_heterogeneous() {
+    echo "### Executando Testes com SIMGRID###"
+    FIXED_SIZE=5000
+
+    for PROC in "${PROCESS_COUNTS_SIMGRID[@]}"; do
+        OUTPUT_FILE="$RESULTS_DIR/simgrid/heterogeneous_${PROC}.txt"
+        echo "Imagem: $FIXED_SIZE, Processos: $PROC"
+        for ((i=1; i<=$ITERATIONS; i++)); do
+            { smpirun -np $PROC -hostfile $HOSTFILE -platform $HETEROGENEOUS_CLUSTER $SIMGRID_EXEC $FIXED_SIZE; } >> "$OUTPUT_FILE"
+        done
+    done
+}
+
 # Execução dos testes
-run_seq
-run_mpich
+# run_seq
+# run_mpich
+run_simgrid_heterogeneous
 
 echo "### Todos os testes foram concluídos! ###"

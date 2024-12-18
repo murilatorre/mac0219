@@ -182,6 +182,9 @@ int main(int argc, char *argv[])  {
         }
     }
 
+    double end_time = MPI_Wtime();
+    printf("[Process %d out of %d]: Time elapsed during the job: %.2fs.\n", rank, numtasks, (end_time-start_time));  
+
     if (rank == 0) {
         FILE *file = fopen(filename, "w");
         if (write_bmp_header(file, width, height)) {
@@ -207,9 +210,6 @@ int main(int argc, char *argv[])  {
             MPI_Send(&auth_recv, 1, MPI_INT, rank + 1, 0, MPI_COMM_WORLD);
         }
     }
-
-    double end_time = MPI_Wtime();
-    printf("[Process %d out of %d]: Time elapsed during the job: %.2fs.\n", rank, numtasks, (end_time-start_time));  
 
     free(pixels);
     MPI_Finalize();
