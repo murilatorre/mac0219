@@ -127,6 +127,7 @@ def plot_speedup(sequential, mpich_results):
     plt.title("Speedup para Diferentes Tamanhos de Imagem")
     plt.grid(True, linestyle="--", linewidth=0.5)
     plt.tight_layout()
+    plt.legend()
     plt.savefig(f"{OUTPUT_DIR}/speedup_with_confidence.png")
     # plt.show()
 
@@ -180,14 +181,14 @@ def main():
     mpich = process_mpich()
     
     print("Gerando gráficos Sequencial vs Paralelo...")
-    plot_sequential_vs_parallel(sequential, mpich)
+    # plot_sequential_vs_parallel(sequential, mpich)
     
     print("Gerando gráficos de Speedup...")
     plot_speedup(sequential, mpich)
     
     print("Gerando gráficos de Eficiência...")
-    for size in sizes:
-        plot_efficiency(mpich, size)
+    # for size in sizes:
+    #    plot_efficiency(mpich, size)
     
     print(f"Gráficos salvos no diretório '{OUTPUT_DIR}'.")
 
